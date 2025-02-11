@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum of Ancient Art</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand" href="#">ARTE.</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#artists">ARTISTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#exhibition">EXHIBITIONS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#shop">SHOP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">ABOUT</a>
+                    </li>
+                </ul>
+                <div class="login-signup d-flex align-items-center">
+                    <button class="btn btn-login me-2">Login</button>
+                    <button class="btn btn-signup">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="l.jpg" alt="Classical art curator" class="hero-image">
+        <div class="hero-content">
+            <h1 class="hero-title">Discover Classical Masterpieces</h1>
+            <p class="hero-tagline">Experience the timeless beauty of ancient art through our curated collection of masterpieces that have shaped human history.</p>
+            <a href="#" class="btn btn-cta mt-4">Explore Exhibition</a>
+        </div>
+    </section>
+<!-- About the Gallery Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="about-title">Unveiling the Past, Inspiring the Future</h2>
+                    <p class="about-text">Step into a world where history comes alive through art. Our gallery is a sanctuary for those who seek to connect with the brilliance of ancient civilizations. Each piece in our collection tells a story, bridging the gap between past and present, and inviting you to be part of this timeless narrative.</p>
+                    <p class="about-text">From classical sculptures to intricate mosaics, our curated selection spans epochs and cultures, offering a unique glimpse into the artistic legacy of humanity. Join us on this extraordinary journey through time and artistry.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="q.jpg" alt="Gallery Interior" class="about-image">
+                </div>
+            </div>
+        </div>
+    </section>
+   <!-- Featured Artworks Section -->
+<section class="featured-artworks-section">
+    <div class="container">
+        <h2 class="featured-artworks-title text-center">Featured Artworks</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Artwork 1 -->
+            <div class="col">
+                <div class="card h-100 artwork-card">
+                    <img src="t.jpg" class="card-img-top" alt="Artwork 1">
+                    <div class="card-body">
+                        <h5 class="card-title">The Night Watch </h5>
+                        <p class="card-text">A dynamic militia portrait by Rembrandt van Rijn.</p>
+                        <a href="#" class="btn btn-view-details">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Artwork 2 -->
+            <div class="col">
+                <div class="card h-100 artwork-card">
+                    <img src="u.jpg" class="card-img-top" alt="Artwork 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Las Meninas</h5>
+                        <p class="card-text">A complex royal scene by Diego Velázquez.</p>
+                        <a href="#" class="btn btn-view-details">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Artwork 3 -->
+            <div class="col">
+                <div class="card h-100 artwork-card">
+                    <img src="w.jpg" class="card-img-top" alt="Artwork 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Whistler's Mother</h5>
+                        <p class="card-text">A serene portrait of Whistler's mother.</p>
+                        <a href="#" class="btn btn-view-details">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Upcoming Exhibitions Section -->
+<section class="upcoming-exhibitions-section">
+    <div class="container">
+        <h2 class="upcoming-exhibitions-title text-center">Upcoming Exhibitions</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Exhibition 1 -->
+            <div class="col">
+                <div class="card h-100 exhibition-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Renaissance Masterpieces</h5>
+                        <p class="card-text">May 1 - July 31, 2025</p>
+                        <a href="#" class="btn btn-book-now">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Exhibition 2 -->
+            <div class="col">
+                <div class="card h-100 exhibition-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ancient Greek Sculptures</h5>
+                        <p class="card-text">June 15 - September 30, 2025</p>
+                        <a href="#" class="btn btn-book-now">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Exhibition 3 -->
+            <div class="col">
+                <div class="card h-100 exhibition-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ancient Paintings Reimagined</h5>
+                        <p class="card-text">August 1 - October 31, 2025</p>
+                        <a href="#" class="btn btn-book-now">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Artist Spotlight Section -->
+<section class="artist-spotlight-section">
+    <div class="container">
+        <h2 class="artist-spotlight-title text-center">Artist Spotlight</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <!-- Artist 1 -->
+            <div class="col">
+                <div class="artist-item text-center">
+                    <img src="v.jpg" class="artist-image mb-3" alt="Artist 1">
+                    <h5 class="artist-name">Vincent van Gogh</h5>
+                    <p class="artist-bio">A famous Dutch Post-Impressionist artist, is known for his vibrant colors and expressive brushstrokes. Despite facing personal struggles, he created iconic works like The Starry Night and Sunflowers, leaving a lasting impact on modern art.</p>
+                </div>
+            </div>
+            <!-- Artist 2 -->
+            <div class="col">
+                <div class="artist-item text-center">
+                    <img src="x.jpg" class="artist-image mb-3" alt="Artist 2">
+                    <h5 class="artist-name">Michelangelo</h5>
+                    <p class="artist-bio">A legendary Italian Renaissance artist, is celebrated for his mastery in sculpture, painting, and architecture. His timeless masterpieces, including David and the Sistine Chapel ceiling, showcase unparalleled genius and artistic vision.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="testimonials-title text-center">What Our Visitors Say</h2>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"An absolutely breathtaking experience! The ancient artworks transported me through time."</p>
+                        <p class="testimonial-author">- Sarah J., Art Enthusiast</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The curation is impeccable. Each piece tells a fascinating story of our shared history."</p>
+                        <p class="testimonial-author">- Michael R., Historian</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"A must-visit for anyone interested in classical art. The exhibitions are simply magnificent!"</p>
+                        <p class="testimonial-author">- Emily L., Student</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+    <!-- Footer Section -->
+<footer class="footer-section bg-dark text-light py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Social Media Links -->
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4" style="color: #D2B48C;">Follow Us</h5>
+                <div class="d-flex">
+                    <a href="#" class="me-3 text-light"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="me-3 text-light"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="me-3 text-light"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4" style="color: #D2B48C;">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light text-decoration-none">Home</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Artists</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Exhibitions</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">About</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4" style="color: #D2B48C;">Contact Us</h5>
+                <p><i class="fas fa-map-marker-alt me-2"></i> 123 Art Street, Pakistan</p>
+                <p><i class="fas fa-phone me-2"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-envelope me-2"></i> info@artegallery.com</p>
+            </div>
+            
+            <!-- Newsletter Subscription -->
+            <div class="col-md-3">
+                <h5 class="text-uppercase mb-4" style="color: #D2B48C;">Newsletter</h5>
+                <p>Subscribe to our newsletter for updates on exhibitions and events.</p>
+                <form>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email" aria-label="Your email" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-light" type="button" id="button-addon2">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
