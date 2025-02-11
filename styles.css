@@ -1,0 +1,534 @@
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    
+}
+.navbar {
+    background-color: transparent;
+    padding: 2rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #bda544 !important;
+    font-weight: 700;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    padding: 0.5rem 1.5rem !important;
+    position: relative;
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-link:hover::after {
+    opacity: 0.5;
+}
+
+.nav-link.active::after {
+    opacity: 1;
+}
+
+.nav-link:hover {
+    color: #cccccc !important;
+}
+
+.btn-login,
+.btn-signup {
+    border: 1px solid #D2B48C;
+    color: #D2B48C;
+    transition: all 0.3s ease;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.btn-login:hover,
+.btn-signup:hover {
+    background-color: #D2B48C;
+    color: #0a0a0a;
+}
+
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 45%;
+    text-align: right;
+}
+
+.hero-title {
+    font-size: 3.0rem;
+    color: #D2B48C;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.hero-tagline {
+    font-size: 1.3rem;
+    color: #ffffff;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.btn-cta {
+    background-color: #5b3b28;
+    color: white;
+    padding: 12px 24px;
+    border: 2px solid #f5e1a4;
+    font-size: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    animation: glowButton 1.5s infinite alternate;
+}
+
+.btn-cta:hover {
+    background-color: #f5e1a4;
+    color: #5b3b28;
+    transform: scale(1.05);
+    box-shadow: 0 0 8px #f5e1a4, 0 0 15px #f5e1a4;
+}
+
+.featured-artworks-section {
+background-color: #000000;
+padding: 1rem 0;
+}
+
+.featured-artworks-title {
+font-size: 2.4rem;
+color: #D2B48C;
+margin-bottom: 3rem;
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+.artwork-card {
+background-color: #0a0a0a;
+border: 1px solid #333;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+overflow: hidden;
+}
+
+.artwork-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 10px 20px rgba(210, 180, 140, 0.3);
+}
+
+.artwork-card .card-img-top {
+height: 250px;
+object-fit: cover;
+transition: transform 0.3s ease;
+}
+
+.artwork-card:hover .card-img-top {
+transform: scale(1.05);
+}
+
+.artwork-card .card-body {
+position: relative;
+z-index: 1;
+}
+
+.artwork-card .card-title {
+font-size: 1.5rem;
+color: #D2B48C;
+margin-bottom: 0.5rem;
+transition: color 0.3s ease;
+}
+
+.artwork-card:hover .card-title {
+color: #f5e1a4;
+}
+
+.artwork-card .card-text {
+font-size: 0.9rem;
+color: #cccccc;
+margin-bottom: 1rem;
+}
+
+.artwork-card .btn-view-details {
+background-color: transparent;
+color: #D2B48C;
+border: 1px solid #D2B48C;
+transition: all 0.3s ease;
+}
+
+.artwork-card:hover .btn-view-details {
+background-color: #D2B48C;
+color: #0a0a0a;
+}
+
+.artwork-card::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: radial-gradient(circle at center, rgba(210, 180, 140, 0.2) 0%, rgba(210, 180, 140, 0) 70%);
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.artwork-card:hover::after {
+opacity: 1;
+}
+/* Artist Spotlight Section Styles */
+.artist-spotlight-section {
+background-color: #000000;
+padding: 4rem 0;
+}
+
+.artist-spotlight-title {
+font-size: 2.4rem;
+color: #D2B48C;
+margin-bottom: 1.5rem;
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+
+.artist-image {
+width: 300px;
+height: 300px;
+object-fit: contain;
+transition: box-shadow 0.3s ease;
+}
+
+.artist-name {
+font-size: 1.5rem;
+color: #bda544;
+margin: 0rem 0;
+transition: color 0.3s ease;
+}
+
+
+.artist-bio {
+font-size: 0.9rem;
+color: #cccccc;
+margin-bottom: 1rem;
+}
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: #0a0a0a;
+        padding: 2rem;
+        margin: 1rem -3rem;
+    }
+
+    .login-signup {
+        margin-top: 1rem;
+    }
+
+    .hero-image {
+        width: 100%;
+        opacity: 0.3;
+    }
+
+    .hero-content {
+        width: 90%;
+        right: 50%;
+        transform: translate(50%, -50%);
+        text-align: center;
+    }
+    .btn-cta {
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+    }
+    .about-section {
+        padding: 3rem 0;
+    }
+
+    .about-image {
+        margin-top: 2rem;
+    }
+    .featured-artworks-section {
+        padding: 4rem 0;
+    }
+
+    .featured-artworks-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .artwork-card .card-img-top {
+        height: 200px;
+    }
+    .upcoming-exhibitions-section {
+        padding: 4rem 0;
+    }
+
+    .upcoming-exhibitions-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+@media (max-width: 767px) {
+    .featured-artworks-title {
+        font-size: 1.8rem;
+    }
+
+    .artwork-card {
+        margin-bottom: 2rem;
+    }
+    .upcoming-exhibitions-title {
+        font-size: 1.8rem;
+    }
+
+    .exhibition-card {
+        margin-bottom: 2rem;
+    }
+    .artist-spotlight-title {
+        font-size: 1.8rem;
+    }
+
+    .artist-item {
+        margin-bottom: 2rem;
+    }
+}
+/*  About section */
+.about-section {
+    padding: 8rem  0;
+    background-color: #000000;
+}
+
+.about-title {
+    font-size: 2.4rem;
+    color: #D2B48C;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.about-text {
+    font-size: 1.0rem;
+    color: #ffffff;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.about-image {
+    width: 100%;
+    max-width: 600px; 
+    height: 400px;
+    object-fit: contain;
+    border-radius: 0px;
+    position: sticky;
+    top: 10rem; 
+    padding-left: 5rem;
+}
+/* Upcoming Exhibitions Section */
+.upcoming-exhibitions-section {
+background-color: #000000;
+padding: 6rem 0;
+}
+
+.upcoming-exhibitions-title {
+font-size: 2.4rem;
+color: #D2B48C;
+margin-bottom: 3rem;
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+.exhibition-card {
+background-color: #0a0a0a;
+border: 1px solid #333;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+overflow: hidden;
+}
+
+.exhibition-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 10px 20px rgba(210, 180, 140, 0.3);
+}
+
+.exhibition-card .card-body {
+position: relative;
+z-index: 1;
+}
+
+.exhibition-card .card-title {
+font-size: 1.5rem;
+color: #D2B48C;
+margin-bottom: 0.5rem;
+transition: color 0.3s ease;
+}
+
+.exhibition-card:hover .card-title {
+color: #f5e1a4;
+}
+
+.exhibition-card .card-text {
+font-size: 0.9rem;
+color: #cccccc;
+margin-bottom: 1rem;
+}
+
+.exhibition-card .btn-book-now {
+background-color: transparent;
+color: #D2B48C;
+border: 1px solid #D2B48C;
+transition: all 0.3s ease;
+}
+
+.exhibition-card:hover .btn-book-now {
+background-color: #D2B48C;
+color: #0a0a0a;
+}
+
+.exhibition-card::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: radial-gradient(circle at center, rgba(210, 180, 140, 0.2) 0%, rgba(210, 180, 140, 0) 70%);
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.exhibition-card:hover::after {
+opacity: 1;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+background-color: #000000;
+padding: 4rem 0;
+}
+
+.testimonials-title {
+font-size: 2.4rem;
+color: #D2B48C;
+margin-bottom: 3rem;
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+.testimonial-card {
+background-color: #0a0a0a;
+border: 1px solid #333;
+padding: 2rem;
+margin: 0 auto;
+max-width: 800px;
+text-align: center;
+}
+
+.testimonial-text {
+font-size: 1.2rem;
+color: #ffffff;
+font-style: italic;
+margin-bottom: 1rem;
+}
+
+.testimonial-author {
+font-size: 1rem;
+color: #D2B48C;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+background-color: #D2B48C;
+border-radius: 50%;
+width: 35px;
+height: 35px;
+background-size: 50%;
+background-position: center;
+background-repeat: no-repeat;
+border: 1px solid #8B5E3C;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+background-color: #C19A6B;
+}
+
+@media (max-width: 767px) {
+.testimonials-title {
+font-size: 1.8rem;
+}
+
+.testimonial-text {
+font-size: 1rem;
+}
+
+.testimonial-author {
+font-size: 0.9rem;
+}
+.footer-section .col-md-3 {
+text-align: center;
+}
+
+.footer-section .d-flex {
+justify-content: center;
+}
+}
+/*Footer Styles*/
+.footer-section {
+background-color: #0a0a0a;
+border-top: 1px solid #333;
+}
+
+.footer-section h5 {
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+.footer-section a:hover {
+color: #D2B48C !important;
+}
+
+.footer-section .btn-outline-light:hover {
+background-color: #D2B48C;
+border-color: #D2B48C;
+color: #0a0a0a !important;
+}
