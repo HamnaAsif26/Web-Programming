@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ARTE.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-additions.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ARTE.</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#artworks">ARTWORKS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#artists">ARTISTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#exhibition">EXHIBITIONS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#shop">SHOP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">BLOG</a>
+                    </li>
+                </ul>
+                <div class="login-signup d-flex align-items-center">
+                    <a href="login.html"><button class="btn btn-login me-2">Login</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+ <!-- Signup Section -->
+ <section class="signup-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="signup-card">
+                    <div class="signup-header">
+                        <h2>Create Your Account</h2>
+                        <p>Join our community of art enthusiasts and collectors</p>
+                    </div>
+                    
+                    <form id="signupForm" class="signup-form" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                                <div class="invalid-feedback">Please enter your first name.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                                <div class="invalid-feedback">Please enter your last name.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="password-input-group">
+                                <input type="password" class="form-control" id="password" required>
+                                <span class="password-toggle" id="passwordToggle">
+                                    <i class="fa fa-eye-slash"></i>
+                                </span>
+                            </div>
+                            <div class="password-strength" id="passwordStrength"></div>
+                            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <div class="password-input-group">
+                                <input type="password" class="form-control" id="confirmPassword" required>
+                                <span class="password-toggle" id="confirmPasswordToggle">
+                                    <i class="fa fa-eye-slash"></i>
+                                </span>
+                            </div>
+                            <div class="invalid-feedback">Passwords do not match.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                                </label>
+                                <div class="invalid-feedback">You must agree to the terms to continue.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletterCheck">
+                                <label class="form-check-label" for="newsletterCheck">
+                                    Subscribe to our newsletter for updates on exhibitions and events
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-signup-submit w-100">Create Account</button>
+                        
+                        <div class="signup-divider">
+                            <span>or sign up with</span>
+                        </div>
+                        
+                        <div class="social-signup">
+                            <button type="button" class="btn btn-social btn-google">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button type="button" class="btn btn-social btn-facebook">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                        </div>
+                        
+                        <div class="login-link">
+                            Already have an account? <a href="#" id="loginLink">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Registration Successful</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle success-icon"></i>
+                    </div>
+                    <p class="text-center">Thank you for joining ARTE. Your account has been created successfully.</p>
+                    <p class="text-center">A confirmation email has been sent to your email address.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continue to Website</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
