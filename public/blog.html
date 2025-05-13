@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - ARTE.</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .navbar {
+            background: transparent;
+            padding: 1rem 1rem;
+            position: static;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: #bda544 !important;
+            font-weight: 700;
+        }
+        
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem !important;
+            position: relative;
+            transition: color 0.3s ease;
+            font-weight: 400;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            opacity: 0.5;
+        }
+        
+        .nav-link.active::after {
+            opacity: 1;
+        }
+        
+        .nav-link:hover {
+            color: #cccccc !important;
+        }
+        
+        .btn-login,
+        .btn-signup {
+            border: 1px solid #D2B48C;
+            color: #D2B48C;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .btn-login:hover,
+        .btn-signup:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+        
+        /* Blog Hero Section */
+        .blog-hero-section {
+            position: relative;
+            height: 70vh;
+            width: 100%;
+            background: url('https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .blog-hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .blog-hero-title {
+            font-size: 4rem;
+            color: #D2B48C;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .blog-hero-tagline {
+            font-size: 1.5rem;
+            color: #ffffff;
+            line-height: 1.8;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Blog Categories */
+        .blog-categories {
+            padding: 2rem 0;
+            background-color: #0a0a0a;
+        }
+
+        .category-title {
+            color: #D2B48C;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background-color: transparent;
+            color: #cccccc;
+            border: 1px solid #333;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border-color: #D2B48C;
+        }
+
+        /* Featured Blog Post */
+        .featured-post {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .featured-post-image {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .featured-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .featured-post:hover .featured-post-image img {
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(210, 180, 140, 0.9);
+            color: #0a0a0a;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            z-index: 2;
+            font-size: 0.9rem;
+        }
+
+        .featured-post-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-post-category {
+            color: #D2B48C;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-post-title {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+        }
+
+        .featured-post-excerpt {
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .featured-post-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-post-author {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+
+        .featured-post-author-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            object-fit: cover;
+        }
+
+        .featured-post-author-name {
+            color: #D2B48C;
+            font-size: 0.9rem;
+        }
+
+        .featured-post-date {
+            color: #999999;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .featured-post-date i {
+            margin-right: 0.5rem;
+            color: #D2B48C;
+        }
+
+        .btn-read-more {
+            background-color: transparent;
+            color: #D2B48C;
+            border: 1px solid #D2B48C;
+            transition: all 0.3s ease;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .btn-read-more:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+
+        /* Blog Posts */
+        .blog-post {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(210, 180, 140, 0.3);
+        }
+
+        .blog-post-image {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .blog-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-post:hover .blog-post-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-post-category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(210, 180, 140, 0.9);
+            color: #0a0a0a;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .blog-post-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .blog-post-title {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+        }
+
+        .blog-post:hover .blog-post-title {
+            color: #D2B48C;
+        }
+
+        .blog-post-excerpt {
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .blog-post-author {
+            color: #D2B48C;
+            font-size: 0.85rem;
+        }
+
+        .blog-post-date {
+            color: #999999;
+            font-size: 0.85rem;
+        }
+
+        /* Sidebar */
+        .blog-sidebar {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-widget {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-widget-title {
+            color: #D2B48C;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .sidebar-widget-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #D2B48C;
+        }
+
+        .sidebar-categories {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-categories li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .sidebar-categories li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .sidebar-categories a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sidebar-categories a:hover {
+            color: #D2B48C;
+        }
+
+        .sidebar-categories .category-count {
+            background-color: #1a1a1a;
+            color: #D2B48C;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .recent-post {
+            display: flex;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .recent-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .recent-post-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+
+        .recent-post-info {
+            flex-grow: 1;
+        }
+
+        .recent-post-title {
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .recent-post-title:hover {
+            color: #D2B48C;
+        }
+
+        .recent-post-date {
+            color: #999999;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .recent-post-date i {
+            margin-right: 0.5rem;
+            color: #D2B48C;
+            font-size: 0.8rem;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: #1a1a1a;
+            color: #cccccc;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+
+        /* Newsletter */
+        .newsletter-section {
+            padding: 4rem 0;
+            background-color: #0a0a0a;
+            margin-top: 3rem;
+        }
+
+        .newsletter-title {
+            color: #D2B48C;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .newsletter-subtitle {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            height: auto;
+            font-size: 1rem;
+        }
+
+        .newsletter-input:focus {
+            background-color: rgba(26, 26, 26, 0.9);
+            border-color: #D2B48C;
+            box-shadow: 0 0 0 0.2rem rgba(210, 180, 140, 0.25);
+            color: #ffffff;
+        }
+
+        .newsletter-btn {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #c3a27c;
+            color: #0a0a0a;
+        }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-item {
+            margin: 0 0.3rem;
+        }
+
+        .page-link {
+            background-color: #1a1a1a;
+            color: #cccccc;
+            border: 1px solid #333;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .page-item.active .page-link {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border-color: #D2B48C;
+        }
+
+        .page-item.disabled .page-link {
+            background-color: #0a0a0a;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        /* Blog Post Modal */
+        .modal-content {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            border: 1px solid #333;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-title {
+            color: #D2B48C;
+            font-weight: 600;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #333;
+        }
+
+        .btn-close {
+            color: #ffffff;
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .blog-post-modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-post-modal-content {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .blog-post-modal-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-post-modal-content h3 {
+            color: #D2B48C;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .blog-post-modal-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .blog-post-modal-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-post-modal-author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        .blog-post-modal-author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-post-modal-author-name {
+            color: #D2B48C;
+            font-weight: 600;
+        }
+
+        .blog-post-modal-author-title {
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        .blog-post-modal-date {
+            color: #999999;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-post-modal-date i {
+            margin-right: 0.5rem;
+            color: #D2B48C;
+        }
+
+        .blog-post-modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .blog-post-modal-tag {
+            background-color: #1a1a1a;
+            color: #cccccc;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-post-modal-tag:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1060;
+        }
+
+        .toast {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            border: 1px solid #333;
+        }
+
+        .toast-header {
+            background-color: #1a1a1a;
+            color: #D2B48C;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Footer */
+        .footer-section {
+            background-color: #0a0a0a;
+            padding: 4rem 0 2rem;
+            color: #cccccc;
+            margin-top: 4rem;
+        }
+
+        .footer-title {
+            color: #D2B48C;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #D2B48C;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: #cccccc;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #D2B48C;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: #D2B48C;
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+            margin-top: 0.3rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1199px) {
+            .blog-hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .blog-hero-tagline {
+                font-size: 1.3rem;
+            }
+            
+            .featured-post-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .blog-hero-section {
+                height: 60vh;
+            }
+            
+            .blog-hero-title {
+                font-size: 3rem;
+            }
+            
+            .blog-hero-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .featured-post-image {
+                height: 350px;
+            }
+            
+            .featured-post-title {
+                font-size: 1.6rem;
+            }
+            
+            .blog-post-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .blog-hero-section {
+                height: 50vh;
+            }
+            
+            .blog-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .blog-hero-tagline {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+            
+            .featured-post-image {
+                height: 300px;
+            }
+            
+            .featured-post-title {
+                font-size: 1.5rem;
+            }
+            
+            .category-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .blog-hero-section {
+                height: 40vh;
+            }
+            
+            .blog-hero-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            
+            .blog-hero-tagline {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .featured-post-image {
+                height: 250px;
+            }
+            
+            .featured-post-title {
+                font-size: 1.3rem;
+            }
+            
+            .featured-post-excerpt {
+                font-size: 0.9rem;
+            }
+            
+            .blog-post-image {
+                height: 180px;
+            }
+            
+            .blog-post-title {
+                font-size: 1.2rem;
+            }
+            
+            .blog-post-excerpt {
+                font-size: 0.9rem;
+            }
+        }
+
+       
+        /* Navbar toggler custom styling */
+        .navbar-toggler {
+            border: 1px solid #D2B48C;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28210, 180, 140, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand" href="index.html">ARTE.</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artworks.html">ARTWORKS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artists.html">ARTISTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exhibitions.html">EXHIBITIONS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">SHOP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blog.html">BLOG</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="login-signup d-flex align-items-center">
+                        <a href="login.html"><button class="btn btn-login me-2">Login</button></a>
+                        <a href="signup.html"><button class="btn btn-signup">Sign Up</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="blog-hero-section">
+        <div class="blog-hero-content">
+            <h1 class="blog-hero-title">Art Insights & Stories</h1>
+            <p class="blog-hero-tagline">Explore our collection of articles on art history, artist profiles, exhibition insights, and contemporary art trends.</p>
+        </div>
+    </section>
+
+    <!-- Blog Content Section -->
+    <section class="blog-categories">
+        <div class="container">
+            <h2 class="category-title">The ARTE Blog</h2>
+            
+            <div class="category-filter">
+                <button class="category-btn active" data-filter="all">All Posts</button>
+                <button class="category-btn" data-filter="art-history">Art History</button>
+                <button class="category-btn" data-filter="artist-profiles">Artist Profiles</button>
+                <button class="category-btn" data-filter="exhibitions">Exhibitions</button>
+                <button class="category-btn" data-filter="techniques">Techniques & Materials</button>
+                <button class="category-btn" data-filter="collecting">Collecting Art</button>
+            </div>
+            
+            <!-- Featured Post -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="featured-post">
+                        <div class="featured-post-image">
+                            <img src="blog1.png" alt="The Evolution of Portraiture Through the Ages">
+                            <div class="featured-badge">Featured</div>
+                        </div>
+                        <div class="featured-post-content">
+                            <div class="featured-post-category">Art History</div>
+                            <h2 class="featured-post-title">The Evolution of Portraiture Through the Ages</h2>
+                            <div class="featured-post-meta">
+                                <div class="featured-post-author">
+                                    <img src="blog1.png" alt="Dr. Sarah Mitchell" class="featured-post-author-image">
+                                    <span class="featured-post-author-name">Dr. Sarah Mitchell</span>
+                                </div>
+                                <div class="featured-post-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span>May 15, 2025</span>
+                                </div>
+                            </div>
+                            <p class="featured-post-excerpt">From the ancient Egyptian funerary portraits to Renaissance masterpieces and contemporary digital art, portraiture has been a constant yet evolving art form. This article explores how the representation of human identity has transformed across cultures and time periods, reflecting changing artistic techniques and societal values.</p>
+                            <button class="btn btn-read-more" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                data-title="The Evolution of Portraiture Through the Ages"
+                                data-author="Dr. Sarah Mitchell"
+                                data-author-title="Art Historian"
+                                data-date="May 15, 2025"
+                                data-image="blog1.png"
+                                data-category="Art History">
+                                Read More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Blog Posts -->
+            <div class="row g-4" id="blogPostContainer">
+                <!-- Blog Post 1 -->
+                <div class="col-lg-4 col-md-6 blog-item" data-category="artist-profiles">
+                    <div class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="blog2.png" alt="The Genius of Leonardo da Vinci">
+                            <div class="blog-post-category-badge">Artist Profiles</div>
+                        </div>
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">The Genius of Leonardo da Vinci: Artist, Scientist, Inventor</h3>
+                            <p class="blog-post-excerpt">Exploring the multifaceted brilliance of Leonardo da Vinci, whose curiosity and innovation transcended disciplines and continues to inspire creators across fields today.</p>
+                            <div class="blog-post-meta">
+                                <span class="blog-post-author">By Prof. James Wilson</span>
+                                <span class="blog-post-date">April 28, 2025</span>
+                            </div>
+                            <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                data-title="The Genius of Leonardo da Vinci: Artist, Scientist, Inventor"
+                                data-author="Prof. James Wilson"
+                                data-author-title="Renaissance Art Specialist"
+                                data-date="April 28, 2025"
+                                data-image="blog2.png"
+                                data-category="Artist Profiles">
+                                Read More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="col-lg-4 col-md-6 blog-item" data-category="exhibitions">
+                    <div class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="blog3.png" alt="Behind the Scenes: Curating the Renaissance Exhibition">
+                            <div class="blog-post-category-badge">Exhibitions</div>
+                        </div>
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">Behind the Scenes: Curating the Renaissance Exhibition</h3>
+                            <p class="blog-post-excerpt">An insider's look at the meticulous process of bringing together masterpieces from across the world for our acclaimed Renaissance Masterpieces exhibition.</p>
+                            <div class="blog-post-meta">
+                                <span class="blog-post-author">By Elena Rodriguez</span>
+                                <span class="blog-post-date">May 3, 2025</span>
+                            </div>
+                            <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                data-title="Behind the Scenes: Curating the Renaissance Exhibition"
+                                data-author="Elena Rodriguez"
+                                data-author-title="Lead Curator"
+                                data-date="May 3, 2025"
+                                data-image="blog3.png"
+                                data-category="Exhibitions">
+                                Read More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="col-lg-4 col-md-6 blog-item" data-category="techniques">
+                    <div class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="blog4.png" alt="The Art of Fresco Painting">
+                            <div class="blog-post-category-badge">Techniques</div>
+                        </div>
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">The Art of Fresco Painting: From Pompeii to the Renaissance</h3>
+                            <p class="blog-post-excerpt">Discover the challenging technique of fresco painting that has created some of history's most enduring artworks, from ancient Roman villas to Michelangelo's Sistine Chapel.</p>
+                            <div class="blog-post-meta">
+                                <span class="blog-post-author">By Dr. Marco Bianchi</span>
+                                <span class="blog-post-date">April 20, 2025</span>
+                            </div>
+                            <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                data-title="The Art of Fresco Painting: From Pompeii to the Renaissance"
+                                data-author="Dr. Marco Bianchi"
+                                data-author-title="Art Conservator"
+                                data-date="April 20, 2025"
+                                data-image="blog4.png"
+                                data-category="Techniques">
+                                Read More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 4 -->
+                <div class="col-lg-4 col-md-6 blog-item" data-category="art-history">
+                    <div class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="blog5.png" alt="Women Artists of the Baroque Period">
+                            <div class="blog-post-category-badge">Art History</div>
+                        </div>
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">Women Artists of the Baroque Period: Overlooked Masters</h3>
+                            <p class="blog-post-excerpt">Shining a light on the remarkable female artists of the Baroque era who overcame significant societal barriers to create extraordinary works that are finally receiving their due recognition.</p>
+                            <div class="blog-post-meta">
+                                <span class="blog-post-author">By Dr. Amelia Chen</span>
+                                <span class="blog-post-date">May 8, 2025</span>
+                            </div>
+                            <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                data-title="Women Artists of the Baroque Period: Overlooked Masters"
+                                data-author="Dr. Amelia Chen"
+                                data-author-title="Art Historian"
+                                data-date="May 8, 2025"
+                                data-image="blog5.png"
+                                data-category="Art History">
+                                Read More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 5 -->
+                <div class="col-lg-4 col-md-6 blog-item" data-category="collecting">
+                    <div class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="blog6.png" alt="Starting Your Art Collection">
+                            <div class="blog-post-category-badge">Collecting Art</div>
+                        </div>
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">Starting Your Art Collection: A Guide for New Collectors</h3>
+                            <p class="blog-post-excerpt">Expert advice on beginning your journey as an art collector, from understanding your personal taste to navigating galleries, auctions, and making your first meaningful purchase.</p>
+                            <div class="blog-post-meta">
+                                <span class="blog-post-author">By Michael Thompson</span>
+                                <span class="blog-post-date">April 15, 2025</span>
+                            </div>
+                            <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                data-title="Starting Your Art Collection: A Guide for New Collectors"
+                                data-author="Michael Thompson"
+                                data-author-title="Art Advisor"
+                                data-date="April 15, 2025"
+                                data-image="blog6.png"
+                                data-category="Collecting Art">
+                                Read More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 6 -->
+                <div class="col-lg-4 col-md-6 blog-item" data-category="artist-profiles">
+                    <div class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="blog7.png" alt="Vermeer: Master of Light">
+                            <div class="blog-post-category-badge">Artist Profiles</div>
+                        </div>
+                        <div class="blog-post-content">
+                            <h3 class="blog-post-title">Vermeer: Master of Light and Domestic Scenes</h3>
+                            <p class="blog-post-excerpt">Examining the extraordinary technical skill and artistic vision of Johannes Vermeer, whose intimate domestic scenes and masterful use of light continue to captivate viewers centuries later.</p>
+                            <div class="blog-post-meta">
+                                <span class="blog-post-author">By Dr. Thomas Wright</span>
+                                <span class="blog-post-date">May 10, 2025</span>
+                            </div>
+                            <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                data-title="Vermeer: Master of Light and Domestic Scenes"
+                                data-author="Dr. Thomas Wright"
+                                data-author-title="Dutch Art Specialist"
+                                data-date="May 10, 2025"
+                                data-image="blog7.png"
+                                data-category="Artist Profiles">
+                                Read More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Sidebar Section -->
+    <section class="py-5" style="background-color: #000000;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="category-title mb-4">Latest Articles</h2>
+                    
+                    <!-- Latest Blog Posts -->
+                    <div class="row g-4">
+                        <!-- Latest Blog Post 1 -->
+                        <div class="col-md-6">
+                            <div class="blog-post">
+                                <div class="blog-post-image">
+                                    <img src="blog8.png" alt="The Influence of Japanese Prints on Impressionism">
+                                    <div class="blog-post-category-badge">Art History</div>
+                                </div>
+                                <div class="blog-post-content">
+                                    <h3 class="blog-post-title">The Influence of Japanese Prints on Impressionism</h3>
+                                    <p class="blog-post-excerpt">How the discovery of Japanese woodblock prints revolutionized Western art and inspired the Impressionist movement's bold compositions and flattened perspectives.</p>
+                                    <div class="blog-post-meta">
+                                        <span class="blog-post-author">By Dr. Lisa Tanaka</span>
+                                        <span class="blog-post-date">May 12, 2025</span>
+                                    </div>
+                                    <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                        data-title="The Influence of Japanese Prints on Impressionism"
+                                        data-author="Dr. Lisa Tanaka"
+                                        data-author-title="Asian Art Specialist"
+                                        data-date="May 12, 2025"
+                                        data-image="blog8.png"
+                                        data-category="Art History">
+                                        Read More
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Latest Blog Post 2 -->
+                        <div class="col-md-6">
+                            <div class="blog-post">
+                                <div class="blog-post-image">
+                                    <img src="blog9.png" alt="Conservation Challenges of Modern Materials">
+                                    <div class="blog-post-category-badge">Techniques</div>
+                                </div>
+                                <div class="blog-post-content">
+                                    <h3 class="blog-post-title">Conservation Challenges of Modern Materials</h3>
+                                    <p class="blog-post-excerpt">The unique preservation challenges posed by 20th and 21st century artworks that incorporate unstable materials, from plastics to digital media.</p>
+                                    <div class="blog-post-meta">
+                                        <span class="blog-post-author">By Jennifer Lee</span>
+                                        <span class="blog-post-date">May 5, 2025</span>
+                                    </div>
+                                    <button class="btn btn-read-more mt-3" data-bs-toggle="modal" data-bs-target="#blogPostModal" 
+                                        data-title="Conservation Challenges of Modern Materials"
+                                        data-author="Jennifer Lee"
+                                        data-author-title="Senior Conservator"
+                                        data-date="May 5, 2025"
+                                        data-image="blog9.png"
+                                        data-category="Techniques">
+                                        Read More
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <!-- Categories Widget -->
+                    <div class="blog-sidebar">
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Categories</h3>
+                            <ul class="sidebar-categories">
+                                <li><a href="#">Art History <span class="category-count">12</span></a></li>
+                                <li><a href="#">Artist Profiles <span class="category-count">8</span></a></li>
+                                <li><a href="#">Exhibitions <span class="category-count">15</span></a></li>
+                                <li><a href="#">Techniques & Materials <span class="category-count">10</span></a></li>
+                                <li><a href="#">Collecting Art <span class="category-count">6</span></a></li>
+                                <li><a href="#">Contemporary Art <span class="category-count">9</span></a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Recent Posts Widget -->
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Recent Posts</h3>
+                            <div class="recent-post">
+                                <img src="blog1.png" alt="The Evolution of Portraiture" class="recent-post-image">
+                                <div class="recent-post-info">
+                                    <a href="#" class="recent-post-title">The Evolution of Portraiture Through the Ages</a>
+                                    <div class="recent-post-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>May 15, 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <img src="blog5.png" alt="Women Artists of the Baroque Period" class="recent-post-image">
+                                <div class="recent-post-info">
+                                    <a href="#" class="recent-post-title">Women Artists of the Baroque Period: Overlooked Masters</a>
+                                    <div class="recent-post-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>May 8, 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <img src="blog7.png" alt="Vermeer: Master of Light" class="recent-post-image">
+                                <div class="recent-post-info">
+                                    <a href="#" class="recent-post-title">Vermeer: Master of Light and Domestic Scenes</a>
+                                    <div class="recent-post-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>May 10, 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="newsletter-title">Subscribe to Our Blog</h2>
+            <p class="newsletter-subtitle">Stay updated with our latest articles, exhibition insights, and art world news.</p>
+            
+            <form class="newsletter-form" id="newsletterForm">
+                <div class="input-group">
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address" aria-label="Your email address" required>
+                    <button class="btn newsletter-btn" type="submit">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </section>
+ <!-- Footer Section -->
+ <footer class="footer-section">
+    <div class="container">
+        <div class="row">
+            <!-- Social Media Links -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <h5 class="footer-title">Follow Us</h5>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <h5 class="footer-title">Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="artworks.html">Artworks</a></li>
+                    <li><a href="artists.html">Artists</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <h5 class="footer-title">Contact Us</h5>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Art Street, Islamabad, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@artegallery.com</p>
+                </div>
+            </div>
+            
+            <!-- Opening Hours -->
+            <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title">Opening Hours</h5>
+                <div class="footer-contact">
+                    <p><i class="fas fa-clock"></i> Tuesday - Thursday: 10:00 AM - 6:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Friday: 10:00 AM - 9:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Saturday - Sunday: 9:00 AM - 7:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Monday: Closed</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 ARTE Museum. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Blog Post Modal -->
+    <div class="modal fade" id="blogPostModal" tabindex="-1" aria-labelledby="blogPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="blogPostModalLabel">Blog Post</h5>
+                    <button type="button" class="btn  id="blogPostModalLabel">Blog Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="/placeholder.svg" alt="" class="blog-post-modal-image" id="modalBlogImage">
+                    
+                    <div class="blog-post-modal-meta">
+                        <div class="blog-post-modal-author">
+                            <img src="blog1.png" alt="" class="blog-post-modal-author-image">
+                            <div class="blog-post-modal-author-info">
+                                <div class="blog-post-modal-author-name" id="modalAuthorName"></div>
+                                <div class="blog-post-modal-author-title" id="modalAuthorTitle"></div>
+                            </div>
+                        </div>
+                        <div class="blog-post-modal-date">
+                            <i class="far fa-calendar-alt"></i>
+                            <span id="modalDate"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-post-modal-content">
+                        <h2>The Evolution of Portraiture Through the Ages</h2>
+                        <p><strong>Author:</strong> Dr. Sarah Mitchell<br>
+                           <strong>Date:</strong> May 15, 2025</p>
+                    
+                        <p>From the ancient Egyptian funerary portraits to Renaissance masterpieces and contemporary digital art, portraiture has been a constant yet evolving art form. This article explores how the representation of human identity has transformed across cultures and time periods, reflecting changing artistic techniques and societal values.</p>
+                        
+                        <h3>Historical Context</h3>
+                        <p>In ancient civilizations like Egypt and Rome, portraiture served ceremonial and commemorative purposes. These early artworks emphasized status and spiritual beliefs, using rigid stylistic conventions.</p>
+                        
+                        <p>During the Middle Ages and Renaissance, portraiture became more lifelike and individualistic. Artists such as Leonardo da Vinci and Rembrandt captured the subtleties of human emotion and personality, mirroring the humanist ideals of the time.</p>
+                    
+                        <h3>Artistic Significance</h3>
+                        <p>The evolution of portraiture reveals shifts in artistic focus—from divine symbolism to realism, and eventually to abstraction and digital experimentation. Each era brought new techniques, such as oil painting during the Renaissance or AI-generated portraits in the digital age.</p>
+                        
+                        <p>Portraiture not only reflects the artist’s style but also the subject’s cultural identity, social role, and personal story. It remains one of the most powerful forms of visual storytelling in art history.</p>
+                    </div>
+                    
+                    <div class="blog-post-modal-tags">
+                        <a href="#" class="blog-post-modal-tag" id="modalCategory">Art History</a>
+                        <a href="#" class="blog-post-modal-tag">Portraiture</a>
+                        <a href="#" class="blog-post-modal-tag">Cultural Evolution</a>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Share</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container">
+        <!-- Toasts will be dynamically added here -->
+    </div>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Category filter
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const blogItems = document.querySelectorAll('.blog-item');
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Show/hide blog posts based on filter
+                    blogItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Blog Post Modal
+            const blogPostModal = document.getElementById('blogPostModal');
+            blogPostModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const title = button.getAttribute('data-title');
+                const author = button.getAttribute('data-author');
+                const authorTitle = button.getAttribute('data-author-title');
+                const date = button.getAttribute('data-date');
+                const image = button.getAttribute('data-image');
+                const category = button.getAttribute('data-category');
+                
+                // Set modal content
+                document.getElementById('blogPostModalLabel').textContent = title;
+                document.getElementById('modalBlogImage').src = image;
+                document.getElementById('modalBlogImage').alt = title;
+                document.getElementById('modalAuthorName').textContent = author;
+                document.getElementById('modalAuthorTitle').textContent = authorTitle;
+                document.getElementById('modalDate').textContent = date;
+                document.getElementById('modalCategory').textContent = category;
+            });
+
+            // Newsletter Form Submission
+            document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                
+                if (email) {
+                    // Clear the form
+                    emailInput.value = '';
+                    
+                    // Show success message
+                    showToast('Thank you for subscribing to our blog!', 'success');
+                }
+            });
+
+            // Toast notification function
+            function showToast(message, type = 'info') {
+                const toastContainer = document.querySelector('.toast-container');
+                
+                // Create toast element
+                const toastEl = document.createElement('div');
+                toastEl.className = 'toast';
+                toastEl.setAttribute('role', 'alert');
+                toastEl.setAttribute('aria-live', 'assertive');
+                toastEl.setAttribute('aria-atomic', 'true');
+                
+                // Set toast content
+                let iconClass = 'fas fa-info-circle';
+                let bgColor = '#1a1a1a';
+                
+                if (type === 'success') {
+                    iconClass = 'fas fa-check-circle';
+                    bgColor = '#1a3a1a';
+                } else if (type === 'warning') {
+                    iconClass = 'fas fa-exclamation-triangle';
+                    bgColor = '#3a2a1a';
+                } else if (type === 'error') {
+                    iconClass = 'fas fa-times-circle';
+                    bgColor = '#3a1a1a';
+                }
+                
+                toastEl.style.backgroundColor = bgColor;
+                
+                toastEl.innerHTML = `
+                    <div class="toast-header">
+                        <i class="${iconClass}" style="color: #D2B48C; margin-right: 8px;"></i>
+                        <strong class="me-auto">ARTE Gallery</strong>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                `;
+                
+                // Add toast to container
+                toastContainer.appendChild(toastEl);
+                
+                // Initialize and show toast
+                const toast = new bootstrap.Toast(toastEl, {
+                    autohide: true,
+                    delay: 5000
+                });
+                toast.show();
+                
+                // Remove toast after it's hidden
+                toastEl.addEventListener('hidden.bs.toast', function() {
+                    toastEl.remove();
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+/* Artwork Detail Styles */
+.artwork-detail-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.artwork-detail-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.artwork-detail-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.artwork-detail-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.artwork-image-container {
+  position: relative;
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.artwork-detail-image {
+  width: 100%;
+  height: auto;
+  cursor: zoom-in;
+  display: block;
+}
+
+.zoom-instructions {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.artwork-thumbnails {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.thumbnail.active {
+  opacity: 1;
+  border: 2px solid #000;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artwork-detail-title {
+  font-size: 28px;
+  margin: 0 0 10px 0;
+}
+
+.artwork-detail-artist {
+  font-size: 20px;
+  margin: 0 0 15px 0;
+  color: #555;
+}
+
+.artwork-detail-year-period {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.artwork-detail-medium,
+.artwork-detail-dimensions {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.artwork-detail-price-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.artwork-detail-price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.artwork-detail-actions {
+  display: flex;
+  gap: 15px;
+  margin: 25px 0;
+  align-items: center;
+}
+
+.artwork-detail-description {
+  margin: 30px 0;
+}
+
+.artwork-detail-description h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.artwork-detail-exhibitions h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.artwork-detail-exhibitions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.artwork-detail-exhibitions li {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.artwork-detail-exhibitions a {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.artwork-detail-exhibitions a:hover {
+  text-decoration: underline;
+}
+
+.related-artworks-section {
+  margin-top: 60px;
+}
+
+.related-artworks-section h2 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.related-artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.load-more-btn {
+  display: block;
+  margin: 30px auto;
+}
+
+/* Zoom Modal */
+.zoom-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.zoom-modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  cursor: zoom-in;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.zoom-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Inquiry Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 500px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Save button styles */
+.btn.saved {
+  background-color: #f8f8f8;
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.btn.saved i {
+  color: #e74c3c;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #000;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error message */
+.error-message {
+  text-align: center;
+  padding: 40px;
+}
+
+.error-message p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .artwork-detail-content {
+    flex-direction: column;
+  }
+
+  .artwork-detail-left,
+  .artwork-detail-right {
+    width: 100%;
+  }
+
+  .related-artworks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}

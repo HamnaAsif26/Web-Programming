@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists - ARTE.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Artists Page Specific Styles */
+        .artists-hero-section {
+            position: relative;
+            height: 50vh;
+            width: 100%;
+            background: url('artist.jpeg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .artists-hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        .artists-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .artists-hero-title {
+            font-size: 3.5rem;
+            color: #D2B48C;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .artists-hero-tagline {
+            font-size: 1.3rem;
+            color: #ffffff;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .artist-card {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(210, 180, 140, 0.3);
+        }
+
+        .artist-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .artist-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .artist-card:hover .artist-image {
+            transform: scale(1.05);
+        }
+
+        .artist-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .artist-name {
+            font-size: 1.5rem;
+            color: #D2B48C;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .artist-card:hover .artist-name {
+            color: #f5e1a4;
+        }
+
+        .artist-period {
+            font-size: 1rem;
+            color: #cccccc;
+            margin-bottom: 1rem;
+        }
+
+        .artist-bio {
+            color: #999999;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .btn-view-profile {
+            background-color: transparent;
+            color: #D2B48C;
+            border: 1px solid #D2B48C;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1.5rem;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .btn-view-profile:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+
+        .filter-container {
+            background-color: rgba(26, 26, 26, 0.5);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            color: #D2B48C;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group label {
+            display: block;
+            color: #D2B48C;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .filter-select {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            border-color: #D2B48C;
+            box-shadow: 0 0 0 0.2rem rgba(210, 180, 140, 0.25);
+        }
+
+        /* Active filters display */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .filter-tag {
+            background-color: rgba(210, 180, 140, 0.2);
+            color: #D2B48C;
+            border: 1px solid #D2B48C;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .filter-tag .remove-filter {
+            background: none;
+            border: none;
+            color: #D2B48C;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        /* Artist Profile Page Styles */
+        .artist-profile-container {
+            background-color: #0a0a0a;
+            padding: 3rem 0;
+            min-height: 100vh;
+        }
+
+        .artist-profile-header {
+            position: relative;
+            height: 40vh;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .artist-profile-header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .artist-profile-header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+
+        .artist-profile-header-content {
+            color: #ffffff;
+        }
+
+        .artist-profile-name {
+            font-size: 2.5rem;
+            color: #D2B48C;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .artist-profile-period {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 0;
+        }
+
+        .artist-profile-main {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .artist-profile-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .artist-profile-sidebar-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .artist-profile-sidebar-info {
+            background-color: rgba(26, 26, 26, 0.5);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .artist-profile-sidebar-info h3 {
+            color: #D2B48C;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        .artist-profile-sidebar-info p {
+            color: #cccccc;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .artist-profile-sidebar-info strong {
+            color: #D2B48C;
+            margin-right: 0.5rem;
+        }
+
+        .artist-profile-content {
+            flex-grow: 1;
+        }
+
+        .artist-profile-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .artist-profile-section-title {
+            color: #D2B48C;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        .artist-profile-bio {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .artist-profile-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .artist-profile-work {
+            background-color: rgba(26, 26, 26, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .artist-profile-work:hover {
+            transform: translateY(-5px);
+        }
+
+        .artist-profile-work-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .artist-profile-work-info {
+            padding: 1rem;
+        }
+
+        .artist-profile-work-title {
+            color: #D2B48C;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .artist-profile-work-year {
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        .artist-profile-back-btn {
+            background-color: transparent;
+            color: #D2B48C;
+            border: 1px solid #D2B48C;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .artist-profile-back-btn:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #cccccc;
+            font-size: 1.2rem;
+            background-color: rgba(26, 26, 26, 0.5);
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 4rem 0;
+            background-color: #000000;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            color: #D2B48C;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .newsletter-subtitle {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            height: auto;
+            font-size: 1rem;
+        }
+
+        .newsletter-input:focus {
+            background-color: rgba(26, 26, 26, 0.9);
+            border-color: #D2B48C;
+            box-shadow: 0 0 0 0.2rem rgba(210, 180, 140, 0.25);
+            color: #ffffff;
+        }
+
+        .newsletter-btn {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #c3a27c;
+            color: #0a0a0a;
+        }
+
+        /* Footer */
+        .footer-section {
+            background-color: #0a0a0a;
+            padding: 4rem 0 2rem;
+            color: #cccccc;
+        }
+
+        .footer-title {
+            color: #D2B48C;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #D2B48C;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: #cccccc;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #D2B48C;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: #D2B48C;
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+            margin-top: 0.3rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 991px) {
+            .artists-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .artist-profile-main {
+                flex-direction: column;
+            }
+            
+            .artist-profile-sidebar {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .artists-hero-section {
+                height: 40vh;
+            }
+            
+            .artists-hero-title {
+                font-size: 2rem;
+            }
+            
+            .artists-hero-tagline {
+                font-size: 1rem;
+            }
+            
+            .artist-profile-header {
+                height: 30vh;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .artists-hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .artist-image-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand" href="index.html">ARTE.</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artworks.html">ARTWORKS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="artists.html">ARTISTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exhibitions.html">EXHIBITIONS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">SHOP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">BLOG</a>
+                    </li>
+                </ul>
+                <div class="login-signup d-flex align-items-center">
+                    <a href="login.html"><button class="btn btn-login me-2">Login</button></a>
+                    <a href="signup.html"><button class="btn btn-signup">Sign Up</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div id="mainContent">
+        <!-- Artists List View -->
+        <div id="artistsListView">
+            <!-- Hero Section -->
+            <section class="artists-hero-section">
+                <div class="artists-hero-content">
+                    <h1 class="artists-hero-title">Meet the Masters</h1>
+                    <p class="artists-hero-tagline">Discover the visionaries who shaped the course of art history through their revolutionary techniques and profound expressions</p>
+                </div>
+            </section>
+
+            <!-- Filter Section -->
+            <section class="py-5" style="background-color: #000000;">
+                <div class="container">
+                    <div class="filter-container">
+                        <h4 class="filter-title">Filter Artists</h4>
+                        <div class="row">
+                            <div class="col-md-4 col-6">
+                                <div class="filter-group">
+                                    <label>Era</label>
+                                    <select class="form-select filter-select" id="eraFilter">
+                                        <option value="">All Eras</option>
+                                        <option value="renaissance">Renaissance</option>
+                                        <option value="baroque">Baroque</option>
+                                        <option value="impressionism">Impressionism</option>
+                                        <option value="modern">Modern</option>
+                                        <option value="post-impressionism">Post-Impressionism</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6">
+                                <div class="filter-group">
+                                    <label>Nationality</label>
+                                    <select class="form-select filter-select" id="nationalityFilter">
+                                        <option value="">All Nationalities</option>
+                                        <option value="italian">Italian</option>
+                                        <option value="dutch">Dutch</option>
+                                        <option value="french">French</option>
+                                        <option value="spanish">Spanish</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="filter-group">
+                                    <label>Sort By</label>
+                                    <select class="form-select filter-select" id="sortFilter">
+                                        <option value="featured">Featured</option>
+                                        <option value="a-z">A-Z</option>
+                                        <option value="z-a">Z-A</option>
+                                        <option value="birth-date">Birth Date</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="active-filters" id="activeFilters">
+                            <!-- Active filters will be added here dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Artists Grid -->
+                    <div class="row" id="artistsGrid">
+                        <!-- Artist cards will be added here dynamically -->
+                    </div>
+
+                    <!-- No Results Message -->
+                    <div id="noResults" class="no-results" style="display: none;">
+                        <p>No artists match your search criteria. Please try different filters.</p>
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="text-center mt-4">
+                        <button class="btn btn-load-more" id="loadMoreBtn">Load More</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Artist Profile Detail View -->
+        <div id="artistProfileView" style="display: none;">
+            <div class="container artist-profile-container">
+                <button class="artist-profile-back-btn" id="backToArtistsBtn">
+                    <i class="fas fa-arrow-left"></i> Back to Artists
+                </button>
+                
+                <div class="artist-profile-header">
+                    <img id="profileHeaderImage" src="/placeholder.svg" alt="" class="artist-profile-header-image">
+                    <div class="artist-profile-header-overlay">
+                        <div class="artist-profile-header-content">
+                            <h1 id="profileName" class="artist-profile-name"></h1>
+                            <p id="profilePeriod" class="artist-profile-period"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="artist-profile-main">
+                    <div class="artist-profile-sidebar">
+                        <img id="profileSidebarImage" src="/placeholder.svg" alt="" class="artist-profile-sidebar-image">
+                        <div class="artist-profile-sidebar-info">
+                            <h3>Artist Information</h3>
+                            <p><strong>Born:</strong> <span id="profileBorn"></span></p>
+                            <p><strong>Died:</strong> <span id="profileDied"></span></p>
+                            <p><strong>Nationality:</strong> <span id="profileNationality"></span></p>
+                            <p><strong>Movement:</strong> <span id="profileMovement"></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-profile-content">
+                        <div class="artist-profile-section">
+                            <h2 class="artist-profile-section-title">Biography</h2>
+                            <div id="profileBiography" class="artist-profile-bio"></div>
+                        </div>
+                        
+                        <div class="artist-profile-section">
+                            <h2 class="artist-profile-section-title">Notable Works</h2>
+                            <div id="profileWorks" class="artist-profile-works-grid">
+                                <!-- Works will be added here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Newsletter Section -->
+ <section class="newsletter-section">
+    <div class="container">
+        <h2 class="newsletter-title">Stay Updated</h2>
+        <p class="newsletter-subtitle">Subscribe to our newsletter to receive updates on upcoming exhibitions, events, and special offers.</p>
+        
+        <form class="newsletter-form" id="newsletterForm">
+            <div class="input-group">
+                <input type="email" class="form-control newsletter-input" placeholder="Your email address" aria-label="Your email address" required>
+                <button class="btn newsletter-btn" type="submit">Subscribe</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row">
+            <!-- Social Media Links -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <h5 class="footer-title">Follow Us</h5>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <h5 class="footer-title">Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="artworks.html">Artworks</a></li>
+                    <li><a href="artists.html">Artists</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <h5 class="footer-title">Contact Us</h5>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Art Street, Islamabad, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@artegallery.com</p>
+                </div>
+            </div>
+            
+            <!-- Opening Hours -->
+            <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title">Opening Hours</h5>
+                <div class="footer-contact">
+                    <p><i class="fas fa-clock"></i> Tuesday - Thursday: 10:00 AM - 6:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Friday: 10:00 AM - 9:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Saturday - Sunday: 9:00 AM - 7:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Monday: Closed</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 ARTE Museum. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Artist data
+        const artistsData = {
+            1: {
+                id: 1,
+                name: "Leonardo da Vinci",
+                fullName: "Leonardo di ser Piero da Vinci",
+                born: "April 15, 1452",
+                died: "May 2, 1519",
+                nationality: "Italian",
+                movement: "Renaissance",
+                era: "renaissance",
+                period: "1452-1519 | Italian Renaissance",
+                image: "da vinci.jpeg",
+                headerImage: "Leonardo da vinci header.jpeg",
+                bio: "A polymath whose areas of interest included invention, painting, sculpting, architecture, science, music, mathematics, engineering, literature, anatomy, geology, astronomy, botany, writing, history, and cartography.",
+                biography: "Leonardo di ser Piero da Vinci was an Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect. While his fame initially rested on his achievements as a painter, he also became known for his notebooks, in which he made drawings and notes on a variety of subjects, including anatomy, astronomy, botany, cartography, painting, and paleontology. Leonardo's genius epitomized the Renaissance humanist ideal, and his collective works compose a contribution to later generations of artists matched only by that of his contemporary Michelangelo.",
+                works: [
+                    {
+                        title: "Mona Lisa",
+                        year: "1503",
+                        image: "mona lisa.jpeg"
+                    },
+                    {
+                        title: "The Last Supper",
+                        year: "1498",
+                        image: "last supper.jpeg"
+                    },
+                    {
+                        title: "Lady with an Ermine",
+                        year: "1491",
+                        image: "ermine lady.jpeg"
+                    }
+                ]
+            },
+            2: {
+                id: 2,
+                name: "Diego Velazquez",
+                fullName: "Diego Rodríguez de Silva y Velázquez",
+                born: "June 6, 1599",
+                died: "August 6, 1660",
+                nationality: "Spanish",
+                movement: "Baroque",
+                era: "Baroque",
+                period: "1475-1564 |  Spanish Golden Age",
+                image: "diego.jpeg",
+                headerImage: "diego header.jpg",
+                bio: "A leading Spanish painter of the Baroque period, known for his realistic and complex portraits, especially of the Spanish royal family.",
+                biography: "Diego Rodríguez de Silva y Velázquez was a Spanish painter who was the leading artist at the royal court of King Philip IV. He is known for his portraits of the royal family and other notable figures, as well as for his historical and mythological scenes. Velázquez's work is characterized by its realism, complex compositions, and masterful use of light and shadow. He is often regarded as one of the most important painters in Western art history.",
+                works: [    
+                {
+                        title: "Las Meninas",
+                        year: "1656",
+                        image: "u.jpg"
+                    },
+                    {
+                        title: "Portrait of Pope Innocent X",
+                        year: "1650",
+                        image: "pop innocent.jpg"
+                    },
+                    {
+                        title: "The Triumph of Bacchus (Los Borrachos)",
+                        year: "1628",
+                        image: "portrait deigo.jpg"
+                    }
+                ]
+            },
+            3: {
+                id: 3,
+                name: "Rembrandt",
+                fullName: "Rembrandt Harmenszoon van Rijn",
+                born: "July 15, 1606",
+                died: "October 4, 1669",
+                nationality: "Dutch",
+                movement: "Baroque",
+                era: "baroque",
+                period: "1606-1669 | Dutch Baroque",
+                image: "rembrandt.jpeg",
+                headerImage: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+                bio: "A Dutch draughtsman, painter, and printmaker. An innovative and prolific master, he is generally considered one of the greatest visual artists in the history of art.",
+                biography: "Rembrandt Harmenszoon van Rijn was a Dutch Golden Age painter, printmaker, and draughtsman. He is generally considered one of the greatest visual artists in the history of art and the most important in Dutch history. His works depict a wide range of style and subject matter, from portraits and self-portraits to landscapes, genre scenes, allegorical and historical scenes, and biblical and mythological themes. His contributions to art came in a period of great wealth and cultural achievement that historians call the Dutch Golden Age.",
+                works: [
+                    {
+                        title: "The Night Watch",
+                        year: "1642",
+                        image: "t.jpg"
+                    },
+                    {
+                        title: "Self Portrait",
+                        year: "1659",
+                        image: "self rembrandt.jpg"
+                    },
+                    {
+                        title: "The Polish Rider",
+                        year: "1650",
+                        image: "The Polish Rider.jpeg"
+                    }
+                ]
+            },
+            4: {
+                id: 4,
+                name: "Claude Monet",
+                fullName: "Oscar-Claude Monet",
+                born: "November 14, 1840",
+                died: "December 5, 1926",
+                nationality: "French",
+                movement: "Impressionism",
+                era: "impressionism",
+                period: "1840-1926 | French Impressionism",
+                image: "monet.jpeg",
+                headerImage: "water lillies.jpg",
+                bio: "A French painter and founder of impressionist painting who is seen as a key precursor to modernism, especially in his attempts to paint nature as he perceived it.",
+                biography: "Oscar-Claude Monet was a French painter and founder of impressionist painting who is seen as a key precursor to modernism, especially in his attempts to paint nature as he perceived it. During his long career, he was the most consistent and prolific practitioner of impressionism's philosophy of expressing one's perceptions before nature. The term 'Impressionism' is derived from the title of his painting Impression, soleil levant, exhibited in 1874.",
+                works: [
+                    {
+                        title: "Water Lilies",
+                        year: "1919",
+                        image: "water lillies.jpeg"
+                    },
+                    {
+                        title: "Impression, Sunrise",
+                        year: "1872",
+                        image: "impression.jpeg"
+                    },
+                    {
+                        title: "Haystacks",
+                        year: "1890",
+                        image: "haystacks.jpeg"
+                    }
+                ]
+            },
+            5: {
+                id: 5,
+                name: "Vincent van Gogh",
+                fullName: "Vincent Willem van Gogh",
+                born: "March 30, 1853",
+                died: "July 29, 1890",
+                nationality: "Dutch",
+                movement: "Post-Impressionism",
+                era: "post-impressionism",
+                period: "1853-1890 | Dutch Post-Impressionism",
+                image: "van gogh.jpeg",
+                headerImage: "vincent header.jpeg",
+                bio: "A Dutch post-impressionist painter who posthumously became one of the most famous and influential figures in Western art history.",
+                biography: "Vincent Willem van Gogh was a Dutch post-impressionist painter who posthumously became one of the most famous and influential figures in Western art history. In a decade, he created about 2,100 artworks, including around 860 oil paintings, most of which date from the last two years of his life. They include landscapes, still lifes, portraits, and self-portraits, and are characterized by bold colors and dramatic, impulsive and expressive brushwork that contributed to the foundations of modern art.",
+                works: [
+                    {
+                        title: "Starry Night",
+                        year: "1889",
+                        image: "starry night.jpeg"
+                    },
+                    {
+                        title: "Café Terrace at Night",
+                        year: "1888",
+                        image: "cafe terrace.jpg"
+                    },
+                    {
+                        title: "Self-Portrait",
+                        year: "1889",
+                        image: "self gogh.jpeg"
+                    }
+                ]
+            },
+            6: {
+                id: 6,
+                name: "Pablo Picasso",
+                fullName: "Pablo Diego José Francisco de Paula Juan Nepomuceno María de los Remedios Cipriano de la Santísima Trinidad Ruiz y Picasso",
+                born: "October 25, 1881",
+                died: "April 8, 1973",
+                nationality: "Spanish",
+                movement: "Cubism, Surrealism",
+                era: "modern",
+                period: "1881-1973 | Spanish Modern",
+                image: "pablo.jpeg",
+                headerImage: "picasso header.jpg",
+                bio: "A Spanish painter, sculptor, printmaker, ceramicist and theatre designer who spent most of his adult life in France. One of the most influential artists of the 20th century.",
+                biography: "Pablo Ruiz Picasso was a Spanish painter, sculptor, printmaker, ceramicist and theatre designer who spent most of his adult life in France. One of the most influential artists of the 20th century, he is known for co-founding the Cubist movement, the invention of constructed sculpture, the co-invention of collage, and for the wide variety of styles that he helped develop and explore. His revolutionary artistic accomplishments brought him universal renown and immense fortune throughout his life, making him one of the best-known figures in 20th-century art.",
+                works: [
+                    {
+                        title: "The Barefoot Girl",
+                        year: "1895",
+                        image: "barefoot.jpeg"
+                    },
+                    {
+                        title: "Portrait of Dora Maar",
+                        year: "1937",
+                        image: "dora'.jpeg"
+                    },
+                    {
+                        title: "Dove of Peace",
+                        year: "1949",
+                        image: "dove.jpeg"
+                    }
+                ]
+            }
+        };
+
+        // Active filters
+        let activeFilters = {
+            era: "",
+            nationality: "",
+            sort: "featured"
+        };
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize the page
+            renderArtistCards();
+            setupEventListeners();
+        });
+
+        // Setup all event listeners
+        function setupEventListeners() {
+            // Filter change events
+            document.getElementById('eraFilter').addEventListener('change', handleFilterChange);
+            document.getElementById('nationalityFilter').addEventListener('change', handleFilterChange);
+            document.getElementById('sortFilter').addEventListener('change', handleFilterChange);
+            
+            // Back button event
+            document.getElementById('backToArtistsBtn').addEventListener('click', showArtistsList);
+            
+            // Load more button
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                    
+                    // Simulate loading delay
+                    setTimeout(() => {
+                        this.innerHTML = 'Load More';
+                        alert('More artists would be loaded here in a real application.');
+                    }, 1500);
+                });
+            }
+        }
+
+        // Handle filter changes
+        function handleFilterChange(event) {
+            const filterId = event.target.id;
+            const filterValue = event.target.value;
+            
+            if (filterId === 'eraFilter') {
+                activeFilters.era = filterValue;
+            } else if (filterId === 'nationalityFilter') {
+                activeFilters.nationality = filterValue;
+            } else if (filterId === 'sortFilter') {
+                activeFilters.sort = filterValue;
+            }
+            
+            applyFilters();
+            updateActiveFiltersDisplay();
+        }
+
+        // Apply filters to artist cards
+        function applyFilters() {
+            const artistsGrid = document.getElementById('artistsGrid');
+            artistsGrid.innerHTML = '';
+            
+            // Get filtered artists
+            let filteredArtists = Object.values(artistsData);
+            
+            // Apply era filter
+            if (activeFilters.era) {
+                filteredArtists = filteredArtists.filter(artist => artist.era === activeFilters.era);
+            }
+            
+            // Apply nationality filter
+            if (activeFilters.nationality) {
+                filteredArtists = filteredArtists.filter(artist => 
+                    artist.nationality.toLowerCase() === activeFilters.nationality);
+            }
+            
+            // Apply sorting
+            if (activeFilters.sort === 'a-z') {
+                filteredArtists.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (activeFilters.sort === 'z-a') {
+                filteredArtists.sort((a, b) => b.name.localeCompare(a.name));
+            } else if (activeFilters.sort === 'birth-date') {
+                filteredArtists.sort((a, b) => {
+                    const yearA = parseInt(a.period.split('-')[0]);
+                    const yearB = parseInt(b.period.split('-')[0]);
+                    return yearA - yearB;
+                });
+            }
+            
+            // Show no results message if needed
+            const noResultsElement = document.getElementById('noResults');
+            if (filteredArtists.length === 0) {
+                noResultsElement.style.display = 'block';
+            } else {
+                noResultsElement.style.display = 'none';
+                
+                // Render filtered artists
+                filteredArtists.forEach(artist => {
+                    artistsGrid.appendChild(createArtistCard(artist));
+                });
+            }
+        }
+
+        // Update active filters display
+        function updateActiveFiltersDisplay() {
+            const activeFiltersContainer = document.getElementById('activeFilters');
+            activeFiltersContainer.innerHTML = '';
+            
+            // Add era filter tag
+            if (activeFilters.era) {
+                const eraSelect = document.getElementById('eraFilter');
+                const eraText = eraSelect.options[eraSelect.selectedIndex].text;
+                addFilterTag(activeFiltersContainer, 'era', eraText);
+            }
+            
+            // Add nationality filter tag
+            if (activeFilters.nationality) {
+                const nationalitySelect = document.getElementById('nationalityFilter');
+                const nationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text;
+                addFilterTag(activeFiltersContainer, 'nationality', nationalityText);
+            }
+        }
+
+        // Add a filter tag to the container
+        function addFilterTag(container, filterType, text) {
+            const tag = document.createElement('div');
+            tag.className = 'filter-tag';
+            tag.innerHTML = `
+                ${text}
+                <button class="remove-filter" data-filter="${filterType}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add click event to remove button
+            const removeButton = tag.querySelector('.remove-filter');
+            removeButton.addEventListener('click', function() {
+                const filterType = this.getAttribute('data-filter');
+                
+                // Reset the filter
+                activeFilters[filterType] = '';
+                
+                // Reset the select element
+                const select = document.getElementById(`${filterType}Filter`);
+                if (select) select.value = '';
+                
+                // Apply filters
+                applyFilters();
+                updateActiveFiltersDisplay();
+            });
+            
+            container.appendChild(tag);
+        }
+
+        // Create an artist card element
+        function createArtistCard(artist) {
+            const col = document.createElement('div');
+            col.className = 'col-lg-4 col-md-6';
+            
+            col.innerHTML = `
+                <div class="artist-card">
+                    <div class="artist-image-container">
+                        <img src="${artist.image}" alt="${artist.name}" class="artist-image">
+                    </div>
+                    <div class="artist-info">
+                        <h3 class="artist-name">${artist.name}</h3>
+                        <p class="artist-period">${artist.period}</p>
+                        <p class="artist-bio">${artist.bio}</p>
+                        <button class="btn btn-view-profile" data-artist-id="${artist.id}">View Profile</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add event listener to the view profile button
+            const viewProfileBtn = col.querySelector('.btn-view-profile');
+            viewProfileBtn.addEventListener('click', function() {
+                const artistId = this.getAttribute('data-artist-id');
+                showArtistProfile(artistId);
+            });
+            
+            return col;
+        }
+
+        // Render all artist cards
+        function renderArtistCards() {
+            const artistsGrid = document.getElementById('artistsGrid');
+            artistsGrid.innerHTML = '';
+            
+            Object.values(artistsData).forEach(artist => {
+                artistsGrid.appendChild(createArtistCard(artist));
+            });
+        }
+
+        // Show artist profile page
+        function showArtistProfile(artistId) {
+            const artist = artistsData[artistId];
+            if (!artist) return;
+            
+            // Set profile content
+            document.getElementById('profileHeaderImage').src = artist.headerImage;
+            document.getElementById('profileHeaderImage').alt = artist.name;
+            document.getElementById('profileName').textContent = artist.name;
+            document.getElementById('profilePeriod').textContent = artist.period;
+            document.getElementById('profileSidebarImage').src = artist.image;
+            document.getElementById('profileSidebarImage').alt = artist.name;
+            
+            // Set artist information
+            const birthYear = artist.period.split('-')[0].trim();
+            const deathYear = artist.period.split('|')[0].split('-')[1].trim();
+            document.getElementById('profileBorn').textContent = artist.born || birthYear;
+            document.getElementById('profileDied').textContent = artist.died || deathYear;
+            document.getElementById('profileNationality').textContent = artist.nationality;
+            document.getElementById('profileMovement').textContent = artist.movement;
+            
+            // Set biography
+            document.getElementById('profileBiography').textContent = artist.biography;
+            
+            // Set works
+            const worksContainer = document.getElementById('profileWorks');
+            worksContainer.innerHTML = '';
+            
+            artist.works.forEach(work => {
+                const workElement = document.createElement('div');
+                workElement.className = 'artist-profile-work';
+                
+                workElement.innerHTML = `
+                    <img src="${work.image}" alt="${work.title}" class="artist-profile-work-image">
+                    <div class="artist-profile-work-info">
+                        <h3 class="artist-profile-work-title">${work.title}</h3>
+                        <p class="artist-profile-work-year">${work.year}</p>
+                    </div>
+                `;
+                
+                worksContainer.appendChild(workElement);
+            });
+            
+            // Hide artists list view and show profile view
+            document.getElementById('artistsListView').style.display = 'none';
+            document.getElementById('artistProfileView').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Show artists list view
+        function showArtistsList() {
+            document.getElementById('artistProfileView').style.display = 'none';
+            document.getElementById('artistsListView').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
+\`\`\`

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ARTE Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: #d2b48c;
+            text-decoration: none;
+        }
+        .content {
+            padding: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            background-color: #d2b48c;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .button:hover {
+            background-color: #c0a080;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 12px;
+            color: #777;
+        }
+        .social-icons {
+            margin: 15px 0;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="#" class="logo">ARTE.</a>
+        </div>
+        <div class="content">
+            <h2>Welcome to ARTE Gallery, {{firstName}}!</h2>
+            <p>Thank you for joining our community of art enthusiasts and collectors. We're excited to have you on board!</p>
+            <p>At ARTE Gallery, you'll discover unique artworks from talented artists around the world, stay updated on upcoming exhibitions, and find exclusive art pieces for your collection.</p>
+            <p>To get started, you can:</p>
+            <ul>
+                <li>Browse our collection of artworks</li>
+                <li>Explore our featured artists</li>
+                <li>Check out upcoming exhibitions</li>
+                <li>Visit our shop for art prints and merchandise</li>
+            </ul>
+            <div style="text-align: center;">
+                <a href="{{loginUrl}}" class="button">Sign In to Your Account</a>
+            </div>
+            <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>
+            <p>Best regards,<br>The ARTE Gallery Team</p>
+        </div>
+        <div class="footer">
+            <div class="social-icons">
+                <a href="#"><img src="https://via.placeholder.com/30x30" alt="Facebook"></a>
+                <a href="#"><img src="https://via.placeholder.com/30x30" alt="Instagram"></a>
+                <a href="#"><img src="https://via.placeholder.com/30x30" alt="Twitter"></a>
+            </div>
+            <p>&copy; {{year}} ARTE Gallery. All rights reserved.</p>
+            <p>If you have any questions, please contact us at <a href="mailto:info@artegallery.com" style="color: #d2b48c;">info@artegallery.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

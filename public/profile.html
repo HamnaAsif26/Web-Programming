@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - ARTE.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .navbar {
+            background: transparent;
+            padding: 1rem 1rem;
+            position: static;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: #bda544 !important;
+            font-weight: 700;
+        }
+        
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem !important;
+            position: relative;
+            transition: color 0.3s ease;
+            font-weight: 400;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            opacity: 0.5;
+        }
+        
+        .nav-link.active::after {
+            opacity: 1;
+        }
+        
+        .nav-link:hover {
+            color: #cccccc !important;
+        }
+        
+        .btn-login,
+        .btn-signup {
+            border: 1px solid #D2B48C;
+            color: #D2B48C;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .btn-login:hover,
+        .btn-signup:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+
+        /* Profile Section Styles */
+        .profile-section {
+            padding: 4rem 0;
+        }
+        
+        .profile-sidebar {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-user-info {
+            padding: 2rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .profile-user-avatar {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+        
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #D2B48C;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-avatar:hover {
+            box-shadow: 0 0 15px rgba(210, 180, 140, 0.5);
+        }
+        
+        .profile-user-name {
+            color: #D2B48C;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .profile-user-email {
+            font-size: 0.9rem;
+            color: #cccccc; /* Brighter color for better visibility */
+        }
+        
+        .profile-user-since {
+            font-size: 0.8rem;
+            color: #cccccc; /* Brighter color for better visibility */
+        }
+        
+        /* Add these new styles for avatar upload functionality */
+        .avatar-upload {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .avatar-upload:hover .avatar-overlay {
+            opacity: 1;
+        }
+
+        .avatar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .avatar-overlay i {
+            color: #ffffff;
+            font-size: 1.5rem;
+        }
+
+        /* Update small text color for better visibility */
+        .text-muted {
+            color: #aaaaaa !important; /* Brighter muted text */
+        }
+
+        /* Profile Dropdown Styles */
+        .profile-dropdown {
+            position: relative;
+        }
+
+        .profile-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #D2B48C;
+            border-radius: 30px;
+            padding: 0.3rem 0.8rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: #D2B48C;
+        }
+
+        .profile-dropdown-toggle:hover {
+            background-color: rgba(210, 180, 140, 0.2);
+        }
+
+        .profile-dropdown-toggle img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            border: 1px solid #D2B48C;
+            object-fit: cover;
+        }
+
+        .profile-dropdown-toggle span {
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .profile-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            width: 180px;
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-dropdown-menu.show {
+            display: block;
+        }
+
+        .profile-dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #333;
+        }
+
+        .profile-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-dropdown-item:hover {
+            background-color: rgba(210, 180, 140, 0.1);
+        }
+
+        .profile-dropdown-item i {
+            width: 20px;
+            margin-right: 0.75rem;
+            color: #D2B48C;
+        }
+
+        .profile-dropdown-item.danger {
+            color: #dc3545;
+        }
+
+        .profile-dropdown-item.danger i {
+            color: #dc3545;
+        }
+
+        .profile-dropdown-item.danger:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .profile-nav {
+            padding: 1rem;
+        }
+        
+        .profile-nav .nav-link {
+            color: #ffffff !important;
+            padding: 0.75rem 1rem !important;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .profile-nav .nav-link:hover {
+            background-color: rgba(210, 180, 140, 0.1);
+        }
+        
+        .profile-nav .nav-link.active {
+            background-color: rgba(210, 180, 140, 0.2);
+            color: #D2B48C !important;
+        }
+        
+        .profile-nav .nav-link::after {
+            display: none;
+        }
+        
+        .profile-nav .nav-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 0.5rem;
+            color: #D2B48C;
+        }
+        
+        .profile-content {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .profile-card {
+            height: 100%;
+        }
+        
+        .profile-card-header {
+            border-bottom: 1px solid #333;
+            padding: 1.5rem;
+        }
+        
+        .profile-card-header h3 {
+            color: #D2B48C;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-card-body {
+            padding: 1.5rem;
+        }
+        
+        .form-label {
+            color: #D2B48C;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background-color: rgba(26, 26, 26, 0.9);
+            border-color: #D2B48C;
+            box-shadow: 0 0 0 0.2rem rgba(210, 180, 140, 0.25);
+            color: #ffffff;
+        }
+        
+        .form-control:disabled,
+        .form-control[readonly] {
+            background-color: rgba(26, 26, 26, 0.5);
+        }
+        
+        .form-check-input {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+        }
+        
+        .form-check-input:checked {
+            background-color: #D2B48C;
+            border-color: #D2B48C;
+        }
+        
+        .btn-primary {
+            background-color: transparent;
+            color: #D2B48C;
+            border: 1px solid #D2B48C;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border-color: #D2B48C;
+        }
+        
+        .btn-outline-primary {
+            color: #D2B48C;
+            border-color: #D2B48C;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border-color: #D2B48C;
+        }
+        
+        .btn-outline-danger {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+        
+        .btn-danger {
+            background-color: transparent;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+        
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.2);
+            border-color: rgba(40, 167, 69, 0.5);
+            color: #28a745;
+        }
+        
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.2);
+            border-color: rgba(220, 53, 69, 0.5);
+            color: #dc3545;
+        }
+        
+        /* Order History Styles */
+        .order-card {
+            background-color: rgba(26, 26, 26, 0.5);
+            border: 1px solid #333;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .order-card:hover {
+            border-color: #D2B48C;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .order-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .order-status-delivered {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+        
+        .order-status-processing {
+            background-color: rgba(0, 123, 255, 0.2);
+            color: #007bff;
+            border: 1px solid #007bff;
+        }
+        
+        .order-status-pending {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+        
+        /* Saved Artworks Styles */
+        .artwork-image {
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .card {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: #D2B48C;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-title {
+            color: #D2B48C;
+            font-weight: 600;
+        }
+        
+        .card-text {
+            color: #cccccc;
+        }
+        
+        /* Exhibition Tickets Styles */
+        .exhibition-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .exhibition-status-past {
+            background-color: rgba(108, 117, 125, 0.2);
+            color: #6c757d;
+            border: 1px solid #6c757d;
+        }
+        
+        .exhibition-status-current {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+        
+        .exhibition-status-upcoming {
+            background-color: rgba(0, 123, 255, 0.2);
+            color: #007bff;
+            border: 1px solid #007bff;
+        }
+        
+        /* Password Input Styles */
+        .password-input-group {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #cccccc;
+            transition: color 0.3s ease;
+            z-index: 5;
+        }
+        
+        .password-toggle:hover {
+            color: #D2B48C;
+        }
+        
+        .password-strength {
+            height: 5px;
+            margin-top: 8px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            background-color: #333;
+        }
+        
+        /* Modal Styles */
+        .modal-content {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid #333;
+            background-color: rgba(26, 26, 26, 0.8);
+        }
+        
+        .modal-title {
+            color: #D2B48C;
+        }
+        
+        .modal-footer {
+            border-top: 1px solid #333;
+        }
+        
+        .btn-close {
+            color: #ffffff;
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+        
+        /* Spinner */
+        .spinner-border {
+            color: #D2B48C !important;
+        }
+        
+        /* Toast Styles */
+        .toast {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+        }
+        
+        .toast-header {
+            background-color: rgba(26, 26, 26, 0.8);
+            color: #D2B48C;
+            border-bottom: 1px solid #333;
+        }
+        
+        /* Profile Info Display */
+        .profile-info-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-info-label {
+            color: #D2B48C;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-info-value {
+            background-color: rgba(26, 26, 26, 0.5);
+            border: 1px solid #333;
+            border-radius: 0.25rem;
+            padding: 0.75rem 1rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .profile-sidebar {
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Profile Button in Navbar */
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #D2B48C;
+            border-radius: 50px;
+            color: #D2B48C;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            background-color: rgba(210, 180, 140, 0.2);
+        }
+
+        .profile-btn img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 0.5rem;
+            border: 1px solid #D2B48C;
+        }
+
+        .profile-btn span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Avatar Upload Styles */
+        .avatar-upload {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .avatar-upload:hover::after {
+            content: '\f030';
+            font-family: 'Font Awesome 5 Free';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        #avatarUpload {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ARTE.</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artworks.html">ARTWORKS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artists.html">ARTISTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exhibitions.html">EXHIBITIONS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">SHOP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">BLOG</a>
+                    </li>
+                </ul>
+                <div class="login-signup d-flex align-items-center">
+                    <!-- This will be replaced by auth.js -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="row">
+                <!-- Profile Sidebar -->
+                <div class="col-lg-3 mb-4">
+                    <div class="profile-sidebar">
+                        <div class="profile-user-info text-center mb-4">
+                            <div class="profile-user-avatar mb-3">
+                                <label for="avatarUpload" class="avatar-upload">
+                                    <img src="/placeholder.svg?height=120&width=120" alt="User Avatar" class="profile-avatar" id="userAvatar">
+                                    <div class="avatar-overlay">
+                                        <i class="fas fa-camera"></i>
+                                    </div>
+                                </label>
+                                <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                            </div>
+                            <h4 class="profile-user-name" id="profileUserName">Loading...</h4>
+                            <p class="profile-user-email text-muted" id="profileUserEmail">Loading...</p>
+                            <p class="profile-user-since text-muted small" id="profileUserSince">Member since: Loading...</p>
+                        </div>
+                        <div class="profile-nav">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#profile-info" data-bs-toggle="tab">
+                                        <i class="fas fa-user me-2"></i> Personal Info
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#order-history" data-bs-toggle="tab">
+                                        <i class="fas fa-shopping-bag me-2"></i> Order History
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#saved-artworks" data-bs-toggle="tab">
+                                        <i class="fas fa-heart me-2"></i> Saved Artworks
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#exhibition-tickets" data-bs-toggle="tab">
+                                        <i class="fas fa-ticket-alt me-2"></i> Exhibition Tickets
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#account-settings" data-bs-toggle="tab">
+                                        <i class="fas fa-cog me-2"></i> Account Settings
+                                    </a>
+                                </li>
+                                <li class="nav-item mt-4">
+                                    <button class="btn btn-outline-danger w-100" id="logoutBtn">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profile Content -->
+                <div class="col-lg-9">
+                    <div class="profile-content">
+                        <div class="tab-content">
+                            <!-- Personal Information Tab -->
+                            <div class="tab-pane fade show active" id="profile-info">
+                                <div class="profile-card">
+                                    <div class="profile-card-header d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h3>Personal Information</h3>
+                                            <p class="text-muted mb-0">Your personal details</p>
+                                        </div>
+                                        <button class="btn btn-primary" id="editProfileBtn">
+                                            <i class="fas fa-edit me-2"></i> Edit Profile
+                                        </button>
+                                    </div>
+                                    <div class="profile-card-body">
+                                        <!-- Alert for success/error messages -->
+                                        <div class="alert alert-success d-none" id="profileUpdateSuccess">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            <span>Your profile has been updated successfully.</span>
+                                        </div>
+                                        <div class="alert alert-danger d-none" id="profileUpdateError">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            <span id="profileUpdateErrorMessage"></span>
+                                        </div>
+                                        
+                                        <!-- Profile Display View (Default) -->
+                                        <div id="profileDisplayView">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="profile-info-item">
+                                                        <div class="profile-info-label">First Name</div>
+                                                        <div class="profile-info-value" id="displayFirstName">Loading...</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="profile-info-item">
+                                                        <div class="profile-info-label">Last Name</div>
+                                                        <div class="profile-info-value" id="displayLastName">Loading...</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="profile-info-item">
+                                                <div class="profile-info-label">Email Address</div>
+                                                <div class="profile-info-value" id="displayEmail">Loading...</div>
+                                                <small class="text-muted">Email cannot be changed. Contact support for assistance.</small>
+                                            </div>
+                                            <div class="profile-info-item">
+                                                <div class="profile-info-label">Phone Number</div>
+                                                <div class="profile-info-value" id="displayPhone">Loading...</div>
+                                            </div>
+                                            <div class="profile-info-item">
+                                                <div class="profile-info-label">Address</div>
+                                                <div class="profile-info-value" id="displayAddress">Loading...</div>
+                                            </div>
+                                            <div class="profile-info-item">
+                                                <div class="profile-info-label">Newsletter Subscription</div>
+                                                <div class="profile-info-value" id="displayNewsletter">Loading...</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Profile Edit Form (Hidden by default) -->
+                                        <form id="profileForm" class="d-none">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6 mb-3 mb-md-0">
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" name="firstName">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="lastName" class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName" name="lastName">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" id="email" name="email" readonly>
+                                                <small class="text-muted">Email cannot be changed. Contact support for assistance.</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">Phone Number</label>
+                                                <input type="tel" class="form-control" id="phone" name="phone">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label">Address</label>
+                                                <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                                    <label class="form-check-label" for="newsletter">
+                                                        Subscribe to newsletter for updates on exhibitions and events
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                <button type="button" class="btn btn-outline-secondary" id="cancelEditBtn">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Order History Tab -->
+                            <div class="tab-pane fade" id="order-history">
+                                <div class="profile-card">
+                                    <div class="profile-card-header">
+                                        <h3>Order History</h3>
+                                        <p class="text-muted">View your past orders</p>
+                                    </div>
+                                    <div class="profile-card-body">
+                                        <div id="ordersList">
+                                            <div class="text-center py-5" id="ordersLoading">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                                <p class="mt-2">Loading your orders...</p>
+                                            </div>
+                                            <div class="text-center py-5 d-none" id="noOrders">
+                                                <i class="fas fa-shopping-bag fa-3x text-muted mb-3"></i>
+                                                <h5>No Orders Yet</h5>
+                                                <p class="text-muted">You haven't placed any orders yet.</p>
+                                                <a href="shop.html" class="btn btn-primary mt-2">Browse Shop</a>
+                                            </div>
+                                            <div id="ordersContainer" class="d-none">
+                                                <!-- Orders will be loaded here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Saved Artworks Tab -->
+                            <div class="tab-pane fade" id="saved-artworks">
+                                <div class="profile-card">
+                                    <div class="profile-card-header">
+                                        <h3>Saved Artworks</h3>
+                                        <p class="text-muted">Artworks you've saved for later</p>
+                                    </div>
+                                    <div class="profile-card-body">
+                                        <div id="savedArtworksList">
+                                            <div class="text-center py-5" id="artworksLoading">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                                <p class="mt-2">Loading your saved artworks...</p>
+                                            </div>
+                                            <div class="text-center py-5 d-none" id="noArtworks">
+                                                <i class="fas fa-heart fa-3x text-muted mb-3"></i>
+                                                <h5>No Saved Artworks</h5>
+                                                <p class="text-muted">You haven't saved any artworks yet.</p>
+                                                <a href="artworks.html" class="btn btn-primary mt-2">Explore Artworks</a>
+                                            </div>
+                                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 d-none" id="artworksContainer">
+                                                <!-- Saved artworks will be loaded here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exhibition Tickets Tab -->
+                            <div class="tab-pane fade" id="exhibition-tickets">
+                                <div class="profile-card">
+                                    <div class="profile-card-header">
+                                        <h3>Exhibition Tickets</h3>
+                                        <p class="text-muted">Your booked exhibition tickets</p>
+                                    </div>
+                                    <div class="profile-card-body">
+                                        <div id="ticketsList">
+                                            <div class="text-center py-5" id="ticketsLoading">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                                <p class="mt-2">Loading your tickets...</p>
+                                            </div>
+                                            <div class="text-center py-5 d-none" id="noTickets">
+                                                <i class="fas fa-ticket-alt fa-3x text-muted mb-3"></i>
+                                                <h5>No Exhibition Tickets</h5>
+                                                <p class="text-muted">You haven't booked any exhibition tickets yet.</p>
+                                                <a href="exhibitions.html" class="btn btn-primary mt-2">View Exhibitions</a>
+                                            </div>
+                                            <div id="ticketsContainer" class="d-none">
+                                                <!-- Tickets will be loaded here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Account Settings Tab -->
+                            <div class="tab-pane fade" id="account-settings">
+                                <div class="profile-card">
+                                    <div class="profile-card-header">
+                                        <h3>Account Settings</h3>
+                                        <p class="text-muted">Manage your account security</p>
+                                    </div>
+                                    <div class="profile-card-body">
+                                        <!-- Change Password Section -->
+                                        <div class="mb-5">
+                                            <h4 class="mb-3">Change Password</h4>
+                                            
+                                            <!-- Alert for success/error messages -->
+                                            <div class="alert alert-success d-none" id="passwordUpdateSuccess">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                <span>Your password has been updated successfully.</span>
+                                            </div>
+                                            <div class="alert alert-danger d-none" id="passwordUpdateError">
+                                                <i class="fas fa-exclamation-circle me-2"></i>
+                                                <span id="passwordUpdateErrorMessage"></span>
+                                            </div>
+                                            
+                                            <form id="changePasswordForm">
+                                                <div class="mb-3">
+                                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                                    <div class="password-input-group">
+                                                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                                        <span class="password-toggle" id="currentPasswordToggle">
+                                                            <i class="fa fa-eye-slash"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="newPassword" class="form-label">New Password</label>
+                                                    <div class="password-input-group">
+                                                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                                        <span class="password-toggle" id="newPasswordToggle">
+                                                            <i class="fa fa-eye-slash"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="password-strength" id="newPasswordStrength"></div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                                    <div class="password-input-group">
+                                                        <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                                                        <span class="password-toggle" id="confirmNewPasswordToggle">
+                                                            <i class="fa fa-eye-slash"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="invalid-feedback">Passwords do not match.</div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Update Password</button>
+                                            </form>
+                                        </div>
+                                        
+                                        <!-- Delete Account Section -->
+                                        <div>
+                                            <h4 class="mb-3">Delete Account</h4>
+                                            <p class="text-muted">Once you delete your account, there is no going back. Please be certain.</p>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                                                Delete Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delete Account Modal -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-danger fa-3x"></i>
+                    </div>
+                    <p>Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.</p>
+                    <div class="mb-3">
+                        <label for="deleteConfirmPassword" class="form-label">Enter your password to confirm</label>
+                        <input type="password" class="form-control" id="deleteConfirmPassword" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteAccount">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container for notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - profile page');
+            
+            // Check if user is logged in
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                return;
+            }
+            
+            // Get current user
+            const user = getCurrentUser();
+            
+            // Update profile header
+            document.getElementById('profileUserName').textContent = `${user.firstName} ${user.lastName}`;
+            document.getElementById('profileUserEmail').textContent = user.email;
+            
+            // Format date
+            const createdAt = user.createdAt ? new Date(user.createdAt) : new Date();
+            const formattedDate = createdAt.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('profileUserSince').textContent = `Member since: ${formattedDate}`;
+            
+            // Update profile display view
+            document.getElementById('displayFirstName').textContent = user.firstName || 'Not provided';
+            document.getElementById('displayLastName').textContent = user.lastName || 'Not provided';
+            document.getElementById('displayEmail').textContent = user.email || 'Not provided';
+            document.getElementById('displayNewsletter').textContent = user.newsletter ? 'Subscribed' : 'Not subscribed';
+            
+            // Fill profile form (hidden by default)
+            document.getElementById('firstName').value = user.firstName || '';
+            document.getElementById('lastName').value = user.lastName || '';
+            document.getElementById('email').value = user.email || '';
+            document.getElementById('newsletter').checked = user.newsletter || false;
+            
+            // Load additional user data from API
+            loadUserProfile();
+            
+            // Load user orders
+            loadUserOrders();
+            
+            // Load saved artworks
+            loadSavedArtworks();
+            
+            // Load exhibition tickets
+            loadExhibitionTickets();
+            
+            // Handle edit profile button
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            if (editProfileBtn) {
+                editProfileBtn.addEventListener('click', function() {
+                    document.getElementById('profileDisplayView').classList.add('d-none');
+                    document.getElementById('profileForm').classList.remove('d-none');
+                });
+            }
+            
+            // Handle cancel edit button
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            if (cancelEditBtn) {
+                cancelEditBtn.addEventListener('click', function() {
+                    document.getElementById('profileForm').classList.add('d-none');
+                    document.getElementById('profileDisplayView').classList.remove('d-none');
+                });
+            }
+            
+            // Handle profile form submission
+            const profileForm = document.getElementById('profileForm');
+            if (profileForm) {
+                profileForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Hide previous alerts
+                    document.getElementById('profileUpdateSuccess').classList.add('d-none');
+                    document.getElementById('profileUpdateError').classList.add('d-none');
+                    
+                    // Get form data
+                    const formData = {
+                        firstName: document.getElementById('firstName').value.trim(),
+                        lastName: document.getElementById('lastName').value.trim(),
+                        phone: document.getElementById('phone').value.trim(),
+                        address: document.getElementById('address').value.trim(),
+                        newsletter: document.getElementById('newsletter').checked
+                    };
+                    
+                    try {
+                        // Get token
+                        const token = localStorage.getItem('userToken');
+                        
+                        // Send update request
+                        const response = await fetch('/api/users/profile', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            // Update local storage
+                            const updatedUser = {
+                                ...user,
+                                firstName: formData.firstName,
+                                lastName: formData.lastName,
+                                phone: formData.phone,
+                                address: formData.address,
+                                newsletter: formData.newsletter
+                            };
+                            localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+                            
+                            // Update profile header
+                            document.getElementById('profileUserName').textContent = `${updatedUser.firstName} ${updatedUser.lastName}`;
+                            
+                            // Update profile display view
+                            document.getElementById('displayFirstName').textContent = updatedUser.firstName || 'Not provided';
+                            document.getElementById('displayLastName').textContent = updatedUser.lastName || 'Not provided';
+                            document.getElementById('displayPhone').textContent = updatedUser.phone || 'Not provided';
+                            document.getElementById('displayAddress').textContent = updatedUser.address || 'Not provided';
+                            document.getElementById('displayNewsletter').textContent = updatedUser.newsletter ? 'Subscribed' : 'Not subscribed';
+                            
+                            // Show success message
+                            document.getElementById('profileUpdateSuccess').classList.remove('d-none');
+                            
+                            // Switch back to display view
+                            document.getElementById('profileForm').classList.add('d-none');
+                            document.getElementById('profileDisplayView').classList.remove('d-none');
+                            
+                            // Update auth UI
+                            updateAuthUI();
+                        } else {
+                            // Show error message
+                            document.getElementById('profileUpdateErrorMessage').textContent = data.error || 'An error occurred while updating your profile.';
+                            document.getElementById('profileUpdateError').classList.remove('d-none');
+                        }
+                    } catch (error) {
+                        console.error('Error updating profile:', error);
+                        document.getElementById('profileUpdateErrorMessage').textContent = 'An unexpected error occurred. Please try again later.';
+                        document.getElementById('profileUpdateError').classList.remove('d-none');
+                    }
+                });
+            }
+            
+            // Handle password change form submission
+            const changePasswordForm = document.getElementById('changePasswordForm');
+            if (changePasswordForm) {
+                changePasswordForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Hide previous alerts
+                    document.getElementById('passwordUpdateSuccess').classList.add('d-none');
+                    document.getElementById('passwordUpdateError').classList.add('d-none');
+                    
+                    // Get form data
+                    const currentPassword = document.getElementById('currentPassword').value;
+                    const newPassword = document.getElementById('newPassword').value;
+                    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+                    
+                    // Validate passwords
+                    if (newPassword !== confirmNewPassword) {
+                        document.getElementById('passwordUpdateErrorMessage').textContent = 'New passwords do not match.';
+                        document.getElementById('passwordUpdateError').classList.remove('d-none');
+                        return;
+                    }
+                    
+                    if (newPassword.length < 6) {
+                        document.getElementById('passwordUpdateErrorMessage').textContent = 'New password must be at least 6 characters long.';
+                        document.getElementById('passwordUpdateError').classList.remove('d-none');
+                    }
+                    
+                    try {
+                        // Get token
+                        const token = localStorage.getItem('userToken');
+                        
+                        // Send update request
+                        const response = await fetch('/api/users/change-password', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({
+                                currentPassword,
+                                newPassword
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            // Show success message
+                            document.getElementById('passwordUpdateSuccess').classList.remove('d-none');
+                            
+                            // Reset form
+                            changePasswordForm.reset();
+                        } else {
+                            // Show error message
+                            document.getElementById('passwordUpdateErrorMessage').textContent = data.error || 'An error occurred while updating your password.';
+                            document.getElementById('passwordUpdateError').classList.remove('d-none');
+                        }
+                    } catch (error) {
+                        console.error('Error updating password:', error);
+                        document.getElementById('passwordUpdateErrorMessage').textContent = 'An unexpected error occurred. Please try again later.';
+                        document.getElementById('passwordUpdateError').classList.remove('d-none');
+                    }
+                });
+            }
+            
+            // Handle account deletion
+            const confirmDeleteAccount = document.getElementById('confirmDeleteAccount');
+            if (confirmDeleteAccount) {
+                confirmDeleteAccount.addEventListener('click', async function() {
+                    const password = document.getElementById('deleteConfirmPassword').value;
+                    
+                    if (!password) {
+                        alert('Please enter your password to confirm account deletion.');
+                        return;
+                    }
+                    
+                    try {
+                        // Get token
+                        const token = localStorage.getItem('userToken');
+                        
+                        // Send delete request
+                        const response = await fetch('/api/users/delete-account', {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({ password })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            // Logout user
+                            logout();
+                            
+                            // Redirect to home page
+                            window.location.href = 'index.html';
+                        } else {
+                            alert(data.error || 'An error occurred while deleting your account.');
+                        }
+                    } catch (error) {
+                        console.error('Error deleting account:', error);
+                        alert('An unexpected error occurred. Please try again later.');
+                    }
+                });
+            }
+            
+            // Password toggle functionality
+            setupPasswordToggles();
+            
+            // Password strength meter
+            setupPasswordStrengthMeter();
+            
+            // Handle avatar upload
+            const avatarUpload = document.getElementById('avatarUpload');
+            const userAvatar = document.getElementById('userAvatar');
+
+            if (avatarUpload) {
+                avatarUpload.addEventListener('change', function(e) {
+                    if (e.target.files && e.target.files[0]) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            userAvatar.src = e.target.result;
+                            
+                            // Save avatar to localStorage (in a real app, you would upload to server)
+                            localStorage.setItem('userAvatar', e.target.result);
+                            
+                            // Update navbar avatar
+                            updateAuthUI();
+                        }
+                        
+                        reader.readAsDataURL(e.target.files[0]);
+                    }
+                });
+                
+                // Load saved avatar if exists
+                const savedAvatar = localStorage.getItem('userAvatar');
+                if (savedAvatar) {
+                    userAvatar.src = savedAvatar;
+                } else {
+                    // Set default avatar
+                    userAvatar.src = '/placeholder.svg?height=120&width=120';
+                }
+            }
+
+            // Update logout functionality to redirect to landing page
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                logout();
+                window.location.href = 'index.html'; // Redirect to landing page
+            });
+            
+            // Handle navbar profile dropdown
+            document.addEventListener('click', function(e) {
+                const dropdown = document.querySelector('.profile-dropdown-menu');
+                const toggle = document.querySelector('.profile-dropdown-toggle');
+                
+                if (dropdown && toggle) {
+                    if (toggle.contains(e.target)) {
+                        dropdown.classList.toggle('show');
+                    } else if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('show');
+                    }
+                }
+            });
+        });
+        
+        // Load user profile data from API
+        async function loadUserProfile() {
+            try {
+                // Get token
+                const token = localStorage.getItem('userToken');
+                
+                // Fetch user profile
+                const response = await fetch('/api/users/profile', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Fill additional profile data
+                    const phone = data.user.phone || 'Not provided';
+                    const address = data.user.address || 'Not provided';
+                    
+                    // Update display view
+                    document.getElementById('displayPhone').textContent = phone;
+                    document.getElementById('displayAddress').textContent = address;
+                    
+                    // Update form fields
+                    document.getElementById('phone').value = data.user.phone || '';
+                    document.getElementById('address').value = data.user.address || '';
+                }
+            } catch (error) {
+                console.error('Error loading user profile:', error);
+            }
+        }
+        
+        // Load user orders
+        async function loadUserOrders() {
+            try {
+                // Show loading
+                document.getElementById('ordersLoading').classList.remove('d-none');
+                document.getElementById('noOrders').classList.add('d-none');
+                document.getElementById('ordersContainer').classList.add('d-none');
+                
+                // Get token
+                const token = localStorage.getItem('userToken');
+                
+                // Fetch user orders
+                const response = await fetch('/api/users/orders', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                // Hide loading
+                document.getElementById('ordersLoading').classList.add('d-none');
+                
+                if (response.ok) {
+                    if (data.orders && data.orders.length > 0) {
+                        // Render orders
+                        const ordersContainer = document.getElementById('ordersContainer');
+                        ordersContainer.innerHTML = '';
+                        
+                        data.orders.forEach(order => {
+                            const orderDate = new Date(order.createdAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                            
+                            const orderCard = document.createElement('div');
+                            orderCard.className = 'order-card p-3 mb-3';
+                            orderCard.innerHTML = `
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h5 class="mb-1">Order #${order.orderNumber}</h5>
+                                        <p class="text-muted mb-0">${orderDate}</p>
+                                    </div>
+                                    <span class="order-status order-status-${order.status.toLowerCase()}">${order.status}</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p><strong>Items:</strong> ${order.items.length}</p>
+                                        <p><strong>Shipping Address:</strong> ${order.shippingAddress}</p>
+                                    </div>
+                                    <div class="col-md-4 text-md-end">
+                                        <p><strong>Total:</strong> $${order.total.toFixed(2)}</p>
+                                        <a href="order-details.html?id=${order._id}" class="btn btn-sm btn-outline-primary">View Details</a>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            ordersContainer.appendChild(orderCard);
+                        });
+                        
+                        // Show orders container
+                        ordersContainer.classList.remove('d-none');
+                    } else {
+                        // Show no orders message
+                        document.getElementById('noOrders').classList.remove('d-none');
+                    }
+                } else {
+                    console.error('Error loading orders:', data.error);
+                    // Show no orders message
+                    document.getElementById('noOrders').classList.remove('d-none');
+                }
+            } catch (error) {
+                console.error('Error loading user orders:', error);
+                // Hide loading
+                document.getElementById('ordersLoading').classList.add('d-none');
+                // Show no orders message
+                document.getElementById('noOrders').classList.remove('d-none');
+            }
+        }
+        
+        // Load saved artworks
+        async function loadSavedArtworks() {
+            try {
+                // Show loading
+                document.getElementById('artworksLoading').classList.remove('d-none');
+                document.getElementById('noArtworks').classList.add('d-none');
+                document.getElementById('artworksContainer').classList.add('d-none');
+                
+                // Get token
+                const token = localStorage.getItem('userToken');
+                
+                // Fetch saved artworks
+                const response = await fetch('/api/users/saved-artworks', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                // Hide loading
+                document.getElementById('artworksLoading').classList.add('d-none');
+                
+                if (response.ok) {
+                    if (data.artworks && data.artworks.length > 0) {
+                        // Render artworks
+                        const artworksContainer = document.getElementById('artworksContainer');
+                        artworksContainer.innerHTML = '';
+                        
+                        data.artworks.forEach(artwork => {
+                            const artworkCard = document.createElement('div');
+                            artworkCard.className = 'col';
+                            artworkCard.innerHTML = `
+                                <div class="card h-100">
+                                    <img src="${artwork.imageUrl || '/placeholder.svg?height=200&width=300'}" class="card-img-top artwork-image" alt="${artwork.title}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${artwork.title}</h5>
+                                        <p class="card-text text-muted">${artwork.artist}</p>
+                                        <a href="artwork-details.html?id=${artwork._id}" class="btn btn-sm btn-outline-primary">View Details</a>
+                                        <button class="btn btn-sm btn-outline-danger ms-2 remove-artwork" data-id="${artwork._id}">
+                                            <i class="fas fa-heart-broken"></i> Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            artworksContainer.appendChild(artworkCard);
+                        });
+                        
+                        // Add event listeners to remove buttons
+                        document.querySelectorAll('.remove-artwork').forEach(button => {
+                            button.addEventListener('click', async function() {
+                                const artworkId = this.getAttribute('data-id');
+                                await removeSavedArtwork(artworkId);
+                            });
+                        });
+                        
+                        // Show artworks container
+                        artworksContainer.classList.remove('d-none');
+                    } else {
+                        // Show no artworks message
+                        document.getElementById('noArtworks').classList.remove('d-none');
+                    }
+                } else {
+                    console.error('Error loading saved artworks:', data.error);
+                    // Show no artworks message
+                    document.getElementById('noArtworks').classList.remove('d-none');
+                }
+            } catch (error) {
+                console.error('Error loading saved artworks:', error);
+                // Hide loading
+                document.getElementById('artworksLoading').classList.add('d-none');
+                // Show no artworks message
+                document.getElementById('noArtworks').classList.remove('d-none');
+            }
+        }
+        
+        // Remove saved artwork
+        async function removeSavedArtwork(artworkId) {
+            try {
+                // Get token
+                const token = localStorage.getItem('userToken');
+                
+                // Send remove request
+                const response = await fetch(`/api/users/saved-artworks/${artworkId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    // Reload saved artworks
+                    loadSavedArtworks();
+                } else {
+                    const data = await response.json();
+                    console.error('Error removing artwork:', data.error);
+                    alert('Failed to remove artwork. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error removing saved artwork:', error);
+                alert('An unexpected error occurred. Please try again later.');
+            }
+        }
+        
+        // Load exhibition tickets
+        async function loadExhibitionTickets() {
+            try {
+                // Show loading
+                document.getElementById('ticketsLoading').classList.remove('d-none');
+                document.getElementById('noTickets').classList.add('d-none');
+                document.getElementById('ticketsContainer').classList.add('d-none');
+                
+                // Get token
+                const token = localStorage.getItem('userToken');
+                
+                // Fetch exhibition tickets
+                const response = await fetch('/api/users/exhibition-tickets', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                // Hide loading
+                document.getElementById('ticketsLoading').classList.add('d-none');
+                
+                if (response.ok) {
+                    if (data.tickets && data.tickets.length > 0) {
+                        // Render tickets
+                        const ticketsContainer = document.getElementById('ticketsContainer');
+                        ticketsContainer.innerHTML = '';
+                        
+                        data.tickets.forEach(ticket => {
+                            const ticketDate = new Date(ticket.date).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                            
+                            const ticketTime = new Date(ticket.date).toLocaleTimeString('en-US', {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+                            
+                            const today = new Date();
+                            const ticketDateObj = new Date(ticket.date);
+                            let statusClass = '';
+                            let statusText = '';
+                            
+                            if (ticketDateObj < today) {
+                                statusClass = 'exhibition-status-past';
+                                statusText = 'Past';
+                            } else if (ticketDateObj.toDateString() === today.toDateString()) {
+                                statusClass = 'exhibition-status-current';
+                                statusText = 'Today';
+                            } else {
+                                statusClass = 'exhibition-status-upcoming';
+                                statusText = 'Upcoming';
+                            }
+                            
+                            const ticketCard = document.createElement('div');
+                            ticketCard.className = 'card mb-3';
+                            ticketCard.innerHTML = `
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div>
+                                            <h5 class="card-title">${ticket.exhibitionTitle}</h5>
+                                            <p class="card-text text-muted mb-0">${ticketDate} at ${ticketTime}</p>
+                                        </div>
+                                        <span class="exhibition-status ${statusClass}">${statusText}</span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Ticket ID:</strong> ${ticket.ticketNumber}</p>
+                                            <p><strong>Quantity:</strong> ${ticket.quantity}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Type:</strong> ${ticket.ticketType}</p>
+                                            <p><strong>Total:</strong> $${ticket.total.toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <a href="exhibition-details.html?id=${ticket.exhibitionId}" class="btn btn-sm btn-outline-primary">View Exhibition</a>
+                                        ${ticketDateObj > today ? `
+                                            <button class="btn btn-sm btn-outline-danger ms-2 cancel-ticket" data-id="${ticket._id}">
+                                                Cancel Ticket
+                                            </button>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                            `;
+                            
+                            ticketsContainer.appendChild(ticketCard);
+                        });
+                        
+                        // Add event listeners to cancel buttons
+                        document.querySelectorAll('.cancel-ticket').forEach(button => {
+                            button.addEventListener('click', async function() {
+                                const ticketId = this.getAttribute('data-id');
+                                if (confirm('Are you sure you want to cancel this ticket?')) {
+                                    await cancelExhibitionTicket(ticketId);
+                                }
+                            });
+                        });
+                        
+                        // Show tickets container
+                        ticketsContainer.classList.remove('d-none');
+                    } else {
+                        // Show no tickets message
+                        document.getElementById('noTickets').classList.remove('d-none');
+                    }
+                } else {
+                    console.error('Error loading exhibition tickets:', data.error);
+                    // Show no tickets message
+                    document.getElementById('noTickets').classList.remove('d-none');
+                }
+            } catch (error) {
+                console.error('Error loading exhibition tickets:', error);
+                // Hide loading
+                document.getElementById('ticketsLoading').classList.add('d-none');
+                // Show no tickets message
+                document.getElementById('noTickets').classList.remove('d-none');
+            }
+        }
+        
+        // Cancel exhibition ticket
+        async function cancelExhibitionTicket(ticketId) {
+            try {
+                // Get token
+                const token = localStorage.getItem('userToken');
+                
+                // Send cancel request
+                const response = await fetch(`/api/users/exhibition-tickets/${ticketId}/cancel`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    // Reload exhibition tickets
+                    loadExhibitionTickets();
+                } else {
+                    const data = await response.json();
+                    console.error('Error cancelling ticket:', data.error);
+                    alert('Failed to cancel ticket. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error cancelling exhibition ticket:', error);
+                alert('An unexpected error occurred. Please try again later.');
+            }
+        }
+        
+        // Setup password toggle functionality
+        function setupPasswordToggles() {
+            const toggles = [
+                { toggle: 'currentPasswordToggle', input: 'currentPassword' },
+                { toggle: 'newPasswordToggle', input: 'newPassword' },
+                { toggle: 'confirmNewPasswordToggle', input: 'confirmNewPassword' }
+            ];
+            
+            toggles.forEach(item => {
+                const toggle = document.getElementById(item.toggle);
+                const input = document.getElementById(item.input);
+                
+                if (toggle && input) {
+                    toggle.addEventListener('click', function() {
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        this.querySelector('i').classList.toggle('fa-eye');
+                        this.querySelector('i').classList.toggle('fa-eye-slash');
+                    });
+                }
+            });
+        }
+        
+        // Setup password strength meter
+        function setupPasswordStrengthMeter() {
+            const newPasswordInput = document.getElementById('newPassword');
+            const strengthMeter = document.getElementById('newPasswordStrength');
+            
+            if (newPasswordInput && strengthMeter) {
+                newPasswordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    
+                    if (!password) {
+                        strengthMeter.innerHTML = '';
+                        return;
+                    }
+                    
+                    // Calculate password strength
+                    let strength = 0;
+                    
+                    // Length check
+                    if (password.length >= 8) strength += 1;
+                    
+                    // Contains lowercase
+                    if (/[a-z]/.test(password)) strength += 1;
+                    
+                    // Contains uppercase
+                    if (/[A-Z]/.test(password)) strength += 1;
+                    
+                    // Contains number
+                    if (/[0-9]/.test(password)) strength += 1;
+                    
+                    // Contains special character
+                    if (/[^a-zA-Z0-9]/.test(password)) strength += 1;
+                    
+                    // Update strength meter
+                    let strengthText = '';
+                    let strengthClass = '';
+                    let strengthBg = '';
+                    
+                    switch (strength) {
+                        case 0:
+                        case 1:
+                            strengthText = 'Weak';
+                            strengthClass = 'text-danger';
+                            strengthBg = 'background-color: #dc3545;';
+                            break;
+                        case 2:
+                        case 3:
+                            strengthText = 'Medium';
+                            strengthClass = 'text-warning';
+                            strengthBg = 'background-color: #ffc107;';
+                            break;
+                        case 4:
+                        case 5:
+                            strengthText = 'Strong';
+                            strengthClass = 'text-success';
+                            strengthBg = 'background-color: #28a745;';
+                            break;
+                    }
+                    
+                    strengthMeter.innerHTML = `<div style="width: ${strength * 20}%; height: 100%; ${strengthBg}"></div>`;
+                    strengthMeter.insertAdjacentHTML('afterend', `<small class="${strengthClass}" id="strengthText">${strengthText}</small>`);
+                    
+                    // Remove previous strength text
+                    const prevText = document.getElementById('strengthText');
+                    if (prevText && prevText !== strengthMeter.nextElementSibling) {
+                        prevText.remove();
+                    }
+                });
+            }
+        }
+    </script>
+    <script>
+        // This function would be in auth.js, but we're adding it here for demonstration
+        function updateAuthUI() {
+            const loginSignupDiv = document.querySelector('.login-signup');
+            
+            if (loginSignupDiv) {
+                if (isLoggedIn()) {
+                    const user = getCurrentUser();
+                    const avatarSrc = localStorage.getItem('userAvatar') || '/placeholder.svg?height=30&width=30';
+                    
+                    loginSignupDiv.innerHTML = `
+                        <div class="profile-dropdown">
+                            <div class="profile-dropdown-toggle">
+                                <img src="${avatarSrc}" alt="Profile">
+                                <span>${user.firstName || 'User'}</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="profile-dropdown-menu">
+                                <a href="user-profile.html" class="profile-dropdown-item">
+                                    <i class="fas fa-user"></i> My Profile
+                                </a>
+                                <a href="#" class="profile-dropdown-item danger" id="navLogoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Add event listener to navbar logout button
+                    const navLogoutBtn = document.getElementById('navLogoutBtn');
+                    if (navLogoutBtn) {
+                        navLogoutBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            logout();
+                            window.location.href = 'index.html'; // Redirect to landing page
+                        });
+                    }
+                } else {
+                    loginSignupDiv.innerHTML = `
+                        <a href="login.html" class="btn btn-login me-2">Login</a>
+                        <a href="signup.html" class="btn btn-signup">Sign Up</a>
+                    `;
+                }
+            }
+        }
+
+        // Call updateAuthUI on page load
+        updateAuthUI();
+        
+        // Function to handle logout
+        function logout() {
+            // Clear user data from localStorage
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('userInfo');
+            
+            // Redirect to landing page
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

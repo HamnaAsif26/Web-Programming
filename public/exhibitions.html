@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibitions - ARTE.</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Cinzel', serif;
+            
+        }
+        .navbar {
+            background: transparent;
+            padding: 1rem 1rem;
+            position: static;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: #bda544 !important;
+            font-weight: 700;
+        }
+        
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem !important;
+            position: relative;
+            transition: color 0.3s ease;
+            font-weight: 400;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            opacity: 0.5;
+        }
+        
+        .nav-link.active::after {
+            opacity: 1;
+        }
+        
+        .nav-link:hover {
+            color: #cccccc !important;
+        }
+        
+        .btn-login,
+        .btn-signup {
+            border: 1px solid #D2B48C;
+            color: #D2B48C;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .btn-login:hover,
+        .btn-signup:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+        
+        /* Exhibitions Hero Section */
+        .exhibitions-hero-section {
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            background: url('exhibit.jpeg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .exhibitions-hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        .exhibitions-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            padding-top: 6rem; /* Add this line to move text lower */
+        }
+
+        .exhibitions-hero-title {
+            font-size: 4rem;
+            color: #D2B48C;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .exhibitions-hero-tagline {
+            font-size: 1.5rem;
+            color: #ffffff;
+            line-height: 1.8;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #D2B48C, #BDA544);
+            color: #0a0a0a;
+            padding: 0.85rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid #D2B48C;
+            box-shadow: 0 4px 15px rgba(210, 180, 140, 0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: #D2B48C;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(210, 180, 140, 0.6);
+        }
+
+        /* Exhibition Tabs */
+        .exhibition-tabs {
+            border-bottom: 1px solid #333;
+            margin-bottom: 3rem;
+        }
+
+        .exhibition-tabs .nav-link {
+            color: #cccccc;
+            background-color: transparent;
+            border: none;
+            border-bottom: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+            position: relative;
+        }
+
+        .exhibition-tabs .nav-link:hover {
+            color: #D2B48C;
+        }
+
+        .exhibition-tabs .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background-color: #D2B48C;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .exhibition-tabs .nav-link:hover::after {
+            opacity: 0.5;
+        }
+
+        .exhibition-tabs .nav-link.active {
+            color: #D2B48C;
+            background-color: transparent;
+            border-bottom: none;
+            font-weight: 600;
+        }
+
+        .exhibition-tabs .nav-link.active::after {
+            opacity: 1;
+        }
+
+        /* Exhibition Cards */
+        .exhibition-card {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exhibition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(210, 180, 140, 0.3);
+        }
+
+        .exhibition-image {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+        }
+
+        .exhibition-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .exhibition-card:hover .exhibition-image img {
+            transform: scale(1.05);
+        }
+
+        .exhibition-date-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(210, 180, 140, 0.9);
+            color: #0a0a0a;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            z-index: 2;
+            font-size: 0.9rem;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(220, 53, 69, 0.9);
+            color: #ffffff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .exhibition-info {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .exhibition-title {
+            font-size: 1.6rem;
+            color: #D2B48C;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            line-height: 1.3;
+        }
+
+        .exhibition-card:hover .exhibition-title {
+            color: #f5e1a4;
+        }
+
+        .exhibition-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .exhibition-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            color: #cccccc;
+            font-size: 0.95rem;
+        }
+
+        .exhibition-detail i {
+            color: #D2B48C;
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .exhibition-description {
+            color: #999999;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .btn-book-tickets {
+            background-color: transparent;
+            color: #D2B48C;
+            border: 1px solid #D2B48C;
+            transition: all 0.3s ease;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .btn-book-tickets:hover {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+        }
+
+        /* Exhibition Calendar */
+        .exhibition-calendar-section {
+            background-color: #0a0a0a;
+            padding: 4rem 0;
+            margin-top: 3rem;
+        }
+
+        .calendar-title {
+            color: #D2B48C;
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .calendar-table {
+            background-color: #111111;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .calendar-table th {
+            background-color: #1a1a1a;
+            color: #D2B48C;
+            font-weight: 600;
+            padding: 1rem;
+            border-color: #333;
+        }
+
+        .calendar-table td {
+            padding: 1rem;
+            color: #cccccc;
+            border-color: #333;
+            vertical-align: middle;
+        }
+
+        .calendar-table tr:hover {
+            background-color: #1a1a1a;
+        }
+
+        /* Visitor Information Section */
+        .visitor-info-section {
+            padding: 4rem 0;
+            background-color: #000000;
+        }
+
+        .visitor-info-title {
+            color: #D2B48C;
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .info-card {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(210, 180, 140, 0.2);
+        }
+
+        .info-card-title {
+            color: #D2B48C;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card-title i {
+            margin-right: 0.8rem;
+            font-size: 1.6rem;
+        }
+
+        .info-card-content {
+            color: #cccccc;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .info-card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 4rem 0;
+            background-color: #0a0a0a;
+        }
+
+        .testimonials-title {
+            color: #D2B48C;
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .testimonial-card {
+            background-color: #111111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            height: 100%;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            color: #D2B48C;
+            font-size: 3rem;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        .testimonial-author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-author-name {
+            color: #D2B48C;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .testimonial-author-title {
+            color: #999999;
+            font-size: 0.85rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 4rem 0;
+            background-color: #000000;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            color: #D2B48C;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .newsletter-subtitle {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            height: auto;
+            font-size: 1rem;
+        }
+
+        .newsletter-input:focus {
+            background-color: rgba(26, 26, 26, 0.9);
+            border-color: #D2B48C;
+            box-shadow: 0 0 0 0.2rem rgba(210, 180, 140, 0.25);
+            color: #ffffff;
+        }
+
+        .newsletter-btn {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #c3a27c;
+            color: #0a0a0a;
+        }
+
+        /* Footer */
+        .footer-section {
+            background-color: #0a0a0a;
+            padding: 4rem 0 2rem;
+            color: #cccccc;
+        }
+
+        .footer-title {
+            color: #D2B48C;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #D2B48C;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: #cccccc;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #D2B48C;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: #D2B48C;
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+            margin-top: 0.3rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1199px) {
+            .exhibitions-hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .exhibitions-hero-tagline {
+                font-size: 1.3rem;
+            }
+            
+            .exhibition-tabs .nav-link {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .exhibitions-hero-section {
+                height: 100vh;
+            }
+            
+            .exhibitions-hero-title {
+                font-size: 3rem;
+            }
+            
+            .exhibitions-hero-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .exhibition-tabs .nav-link {
+                padding: 0.8rem 1.2rem;
+                font-size: 1.1rem;
+            }
+            
+            .exhibition-title {
+                font-size: 1.4rem;
+            }
+            
+            .info-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .testimonial-card {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .exhibitions-hero-section {
+                height: 100vh;
+            }
+            
+            .exhibitions-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .exhibitions-hero-tagline {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+            
+            .hero-cta {
+                padding: 0.6rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .exhibition-tabs .nav-link {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+                margin: 0 0.3rem;
+            }
+            
+            .exhibition-image {
+                height: 240px;
+            }
+            
+            .calendar-title, .visitor-info-title, .testimonials-title, .newsletter-title {
+                font-size: 1.8rem;
+            }
+            
+            .calendar-table th, .calendar-table td {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .exhibitions-hero-section {
+                height: 100vh;
+            }
+            
+            .exhibitions-hero-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            
+            .exhibitions-hero-tagline {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .exhibition-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .exhibition-tabs .nav-link {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+            
+            .exhibition-image {
+                height: 200px;
+            }
+            
+            .exhibition-date-badge {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .exhibition-title {
+                font-size: 1.3rem;
+            }
+            
+            .exhibition-detail {
+                font-size: 0.85rem;
+            }
+            
+            .exhibition-description {
+                font-size: 0.85rem;
+            }
+            
+            .btn-book-tickets {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .calendar-table {
+                font-size: 0.8rem;
+            }
+            
+            .calendar-table th, .calendar-table td {
+                padding: 0.6rem;
+            }
+            
+            .info-card-title {
+                font-size: 1.2rem;
+            }
+            
+            .newsletter-title {
+                font-size: 1.6rem;
+            }
+            
+            .newsletter-subtitle {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            border: 1px solid #333;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-title {
+            color: #D2B48C;
+            font-weight: 600;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #333;
+        }
+
+        .btn-close {
+            color: #ffffff;
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .form-label {
+            color: #D2B48C;
+        }
+
+        .form-control {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+            color: #ffffff;
+        }
+
+        .form-control:focus {
+            background-color: rgba(26, 26, 26, 0.9);
+            border-color: #D2B48C;
+            box-shadow: 0 0 0 0.2rem rgba(210, 180, 140, 0.25);
+            color: #ffffff;
+        }
+
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1060;
+        }
+
+        .toast {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            border: 1px solid #333;
+        }
+
+        .toast-header {
+            background-color: #1a1a1a;
+            color: #D2B48C;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Map Modal */
+        #mapModal .modal-body {
+            height: auto;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 0;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .map-iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            display: block;
+        }
+        
+        .map-info-container {
+            padding: 2rem;
+            background-color: #111111;
+        }
+        
+        .map-info-container h5 {
+            color: #D2B48C;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .map-info-container p {
+            color: #cccccc;
+            margin-bottom: 0.8rem;
+        }
+        
+        .map-info-container strong {
+            color: #D2B48C;
+        }
+        
+        .map-directions-btn {
+            background-color: #D2B48C;
+            color: #0a0a0a;
+            border: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .map-directions-btn:hover {
+            background-color: #c3a27c;
+            color: #0a0a0a;
+        }
+
+        /* Exhibition Detail Modal */
+        .exhibition-detail-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .exhibition-detail-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .exhibition-detail-title {
+            color: #D2B48C;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .ticket-options {
+            margin-top: 1.5rem;
+        }
+
+        .ticket-option {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .ticket-option:last-child {
+            border-bottom: none;
+        }
+
+        .ticket-type {
+            color: #cccccc;
+        }
+
+        .ticket-price {
+            color: #D2B48C;
+            font-weight: 600;
+        }
+
+        .ticket-quantity {
+            width: 60px;
+        }
+        
+        /* Exhibition Archive Highlights */
+        .exhibition-highlight-container {
+            margin-top: 2rem;
+        }
+        
+        .exhibition-highlight-title {
+            color: #D2B48C;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .exhibition-highlight-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+        
+        .exhibition-highlight-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand" href="index.html">ARTE.</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artworks.html">ARTWORKS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artists.html">ARTISTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="exhibitions.html">EXHIBITIONS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">SHOP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">BLOG</a>
+                    </li>
+                </ul>
+                <div class="login-signup d-flex align-items-center">
+                    <a href="login.html"><button class="btn btn-login me-2">Login</button></a>
+                    <a href="signup.html"><button class="btn btn-signup">Sign Up</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="exhibitions-hero-section">
+        <div class="exhibitions-hero-content">
+            <h1 class="exhibitions-hero-title">Immersive Exhibitions</h1>
+            <p class="exhibitions-hero-tagline">Experience our carefully curated exhibitions that bring together masterpieces from across centuries and continents, offering a journey through the evolution of artistic expression.</p>
+            
+        </div>
+    </section>
+
+    <!-- Exhibitions Section -->
+    <section id="current-exhibitions" class="py-5" style="background-color: #000000;">
+        <div class="container">
+            <!-- Exhibition Tabs -->
+            <ul class="nav nav-tabs exhibition-tabs mb-5 justify-content-center" id="exhibitionTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="current-tab" data-bs-toggle="tab" data-bs-target="#current" type="button" role="tab" aria-controls="current" aria-selected="true">Current</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="false">Upcoming</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">Past</button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="exhibitionTabsContent">
+                <!-- Current Exhibitions -->
+                <div class="tab-pane fade show active" id="current" role="tabpanel" aria-labelledby="current-tab">
+                    <div class="row g-4">
+                        <!-- Exhibition 1 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex1.png" alt="Renaissance Masterpieces">
+                                    <div class="exhibition-date-badge">Until July 31, 2025</div>
+                                    <div class="featured-badge">Featured</div>
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Renaissance Masterpieces</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>May 1 - July 31, 2025</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Main Gallery, East Wing</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <span>$25 General Admission</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">Experience the brilliance of Renaissance art with masterpieces from Leonardo da Vinci, Michelangelo, Raphael, and other visionaries who redefined artistic expression during this pivotal period in art history.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#bookTicketsModal" data-exhibition="Renaissance Masterpieces" data-dates="May 1 - July 31, 2025" data-price="25" data-image="rart.jpeg">Book Tickets</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exhibition 2 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex2.png" alt="Dutch Golden Age">
+                                    <div class="exhibition-date-badge">Until Aug 15, 2025</div>
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Dutch Golden Age</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>April 15 - August 15, 2025</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>West Gallery, Floor 2</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <span>$22 General Admission</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">Explore the artistic achievements of the Dutch Golden Age, featuring works by Rembrandt, Vermeer, and other masters who captured the essence of 17th-century Dutch society with unparalleled realism and technical brilliance.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#bookTicketsModal" data-exhibition="Dutch Golden Age" data-dates="April 15 - August 15, 2025" data-price="22" data-image="ex2.jpeg">Book Tickets</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exhibition 3 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex3.png" alt="Impressionist Revolution">
+                                    <div class="exhibition-date-badge">Until Sept 30, 2025</div>
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Impressionist Revolution</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>June 1 - September 30, 2025</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Modern Wing, Floor 1</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <span>$20 General Admission</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">Witness the revolutionary techniques of Impressionist painters like Monet, Renoir, and Degas, who broke from tradition to capture fleeting moments of light and color in ways that forever changed the course of art history.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#bookTicketsModal" data-exhibition="Impressionist Revolution" data-dates="June 1 - September 30, 2025" data-price="20" data-image="ex3.jpeg">Book Tickets</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exhibition 4 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex4.png" alt="Baroque Masterpieces">
+                                    <div class="exhibition-date-badge">Until Oct 15, 2025</div>
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Baroque Splendor</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>July 15 - October 15, 2025</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Main Gallery, West Wing</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <span>$24 General Admission</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">Immerse yourself in the dramatic intensity and grandeur of Baroque art, featuring masterpieces by Caravaggio, Rubens, Bernini, and other artists who embraced emotional intensity and theatrical compositions.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#bookTicketsModal" data-exhibition="Baroque Splendor" data-dates="July 15 - October 15, 2025" data-price="24" data-image="ex4.jpg">Book Tickets</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Exhibitions -->
+                <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+                    <div class="row g-4">
+                        <!-- Upcoming Exhibition 1 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex5.png" alt="Post-Impressionism">
+                                    <div class="exhibition-date-badge">Opens Oct 15, 2025</div>
+                                    <div class="featured-badge">Featured</div>
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Post-Impressionism: Beyond Light</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>October 15, 2025 - January 31, 2026</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Modern Wing, Floor 2</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <span>$28 General Admission</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">Explore how Post-Impressionist artists like Van Gogh, Cézanne, and Gauguin built upon Impressionist techniques to create more personal and expressive works of art that paved the way for modern artistic movements.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#preBookModal" data-exhibition="Post-Impressionism: Beyond Light" data-dates="October 15, 2025 - January 31, 2026" data-price="28" data-image="ex5.jpg">Pre-Book Tickets</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Exhibition 2 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex6.png" alt="Ancient Greek Sculptures">
+                                    <div class="exhibition-date-badge">Opens Nov 1, 2025</div>
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Ancient Greek Sculptures</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>November 1, 2025 - February 28, 2026</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Classical Wing, Floor 1</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <span>$30 General Admission</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">Marvel at the beauty and technical mastery of ancient Greek sculptures, featuring rare pieces on loan from museums around the world that showcase the idealized human form and classical proportions.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#waitlistModal" data-exhibition="Ancient Greek Sculptures" data-dates="November 1, 2025 - February 28, 2026">Join Waitlist</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Exhibition 3 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex7.jpg" alt="Modern Reinterpretations">
+                                    <div class="exhibition-date-badge">Opens Dec 5, 2025</div>
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Ancient Paintings Reimagined</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>December 5, 2025 - March 15, 2026</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Contemporary Wing, Floor 3</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-ticket-alt"></i>
+                                            <span>$25 General Admission</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">Contemporary artists reinterpret classical masterpieces, creating a dialogue between past and present artistic expressions that challenges our understanding of art history and its relevance today.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#notifyModal" data-exhibition="Ancient Paintings Reimagined" data-dates="December 5, 2025 - March 15, 2026">Get Notified</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Exhibitions -->
+                <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+                    <div class="row g-4">
+                        <!-- Past Exhibition 1 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="Gallery.jpeg" alt="Baroque Masterpieces">
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Baroque Masterpieces</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>January 15 - April 30, 2025</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Main Gallery, West Wing</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">This exhibition showcased the dramatic intensity and grandeur of Baroque art, featuring works by Caravaggio, Rubens, and Bernini that exemplified the emotional and theatrical style of the period.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#archiveModal" data-exhibition="Baroque Masterpieces" data-dates="January 15 - April 30, 2025">View Archive</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Past Exhibition 2 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex8.jpg" alt="Neoclassical Revival">
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Neoclassical Revival</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>September 10, 2024 - December 20, 2024</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Classical Wing, Floor 2</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">This exhibition explored the revival of classical forms and subjects in European art during the 18th and early 19th centuries, highlighting the influence of ancient Greek and Roman aesthetics.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#archiveModal" data-exhibition="Neoclassical Revival" data-dates="September 10, 2024 - December 20, 2024">View Archive</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Past Exhibition 3 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="exhibition-card">
+                                <div class="exhibition-image">
+                                    <img src="ex9.jpg" alt="Women in Art">
+                                </div>
+                                <div class="exhibition-info">
+                                    <h3 class="exhibition-title">Women in Art: Hidden Histories</h3>
+                                    <div class="exhibition-details">
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>March 8 - June 30, 2024</span>
+                                        </div>
+                                        <div class="exhibition-detail">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Modern Wing, Floor 3</span>
+                                        </div>
+                                    </div>
+                                    <p class="exhibition-description">This groundbreaking exhibition highlighted the often-overlooked contributions of women artists throughout history, showcasing their remarkable works and exploring the challenges they faced.</p>
+                                    <a href="#" class="btn btn-book-tickets" data-bs-toggle="modal" data-bs-target="#archiveModal" data-exhibition="Women in Art: Hidden Histories" data-dates="March 8 - June 30, 2024">View Archive</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exhibition Calendar Section -->
+    <section class="exhibition-calendar-section">
+        <div class="container">
+            <h2 class="calendar-title">Exhibition Calendar</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-bordered calendar-table">
+                            <thead>
+                                <tr>
+                                    <th>Exhibition</th>
+                                    <th>Dates</th>
+                                    <th>Location</th>
+                                    <th>Admission</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="calendar-row" data-exhibition="Renaissance Masterpieces" data-dates="May 1 - July 31, 2025" data-price="25" data-image="rart.jpeg">
+                                    <td>Renaissance Masterpieces</td>
+                                    <td>May 1 - July 31, 2025</td>
+                                    <td>Main Gallery, East Wing</td>
+                                    <td>$25</td>
+                                </tr>
+                                <tr class="calendar-row" data-exhibition="Dutch Golden Age" data-dates="April 15 - August 15, 2025" data-price="22" data-image="ex2.jpeg">
+                                    <td>Dutch Golden Age</td>
+                                    <td>April 15 - August 15, 2025</td>
+                                    <td>West Gallery, Floor 2</td>
+                                    <td>$22</td>
+                                </tr>
+                                <tr class="calendar-row" data-exhibition="Impressionist Revolution" data-dates="June 1 - September 30, 2025" data-price="20" data-image="ex3.jpeg">
+                                    <td>Impressionist Revolution</td>
+                                    <td>June 1 - September 30, 2025</td>
+                                    <td>Modern Wing, Floor 1</td>
+                                    <td>$20</td>
+                                </tr>
+                                <tr class="calendar-row" data-exhibition="Baroque Splendor" data-dates="July 15 - October 15, 2025" data-price="24" data-image="ex4.jpg">
+                                    <td>Baroque Splendor</td>
+                                    <td>July 15 - October 15, 2025</td>
+                                    <td>Main Gallery, West Wing</td>
+                                    <td>$24</td>
+                                </tr>
+                                <tr class="calendar-row" data-exhibition="Post-Impressionism: Beyond Light" data-dates="October 15, 2025 - January 31, 2026" data-price="28" data-image="ex5.jpg">
+                                    <td>Post-Impressionism: Beyond Light</td>
+                                    <td>October 15, 2025 - January 31, 2026</td>
+                                    <td>Modern Wing, Floor 2</td>
+                                    <td>$28</td>
+                                </tr>
+                                <tr class="calendar-row" data-exhibition="Ancient Greek Sculptures" data-dates="November 1, 2025 - February 28, 2026" data-price="30" data-image="ex6.jpeg">
+                                    <td>Ancient Greek Sculptures</td>
+                                    <td>November 1, 2025 - February 28, 2026</td>
+                                    <td>Classical Wing, Floor 1</td>
+                                    <td>$30</td>
+                                </tr>
+                                <tr class="calendar-row" data-exhibition="Ancient Paintings Reimagined" data-dates="December 5, 2025 - March 15, 2026" data-price="25" data-image="ex7.jpg">
+                                    <td>Ancient Paintings Reimagined</td>
+                                    <td>December 5, 2025 - March 15, 2026</td>
+                                    <td>Contemporary Wing, Floor 3</td>
+                                    <td>$25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visitor Information Section -->
+    <section class="visitor-info-section">
+        <div class="container">
+            <h2 class="visitor-info-title">Visitor Information</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="info-card">
+                        <h3 class="info-card-title"><i class="fas fa-clock"></i> Opening Hours</h3>
+                        <div class="info-card-content">
+                            <p><strong>Monday:</strong> Closed</p>
+                            <p><strong>Tuesday - Thursday:</strong> 10:00 AM - 6:00 PM</p>
+                            <p><strong>Friday:</strong> 10:00 AM - 9:00 PM</p>
+                            <p><strong>Saturday - Sunday:</strong> 9:00 AM - 7:00 PM</p>
+                            <p><em>Last entry 1 hour before closing</em></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="info-card">
+                        <h3 class="info-card-title"><i class="fas fa-ticket-alt"></i> Admission</h3>
+                        <div class="info-card-content">
+                            <p><strong>Adults:</strong> $20 - $30 (varies by exhibition)</p>
+                            <p><strong>Seniors (65+):</strong> $15 - $25</p>
+                            <p><strong>Students (with ID):</strong> $12 - $20</p>
+                            <p><strong>Children (under 12):</strong> Free</p>
+                            <p><strong>Members:</strong> Free</p>
+                            <p><em>Special exhibitions may require additional tickets</em></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="info-card">
+                        <h3 class="info-card-title"><i class="fas fa-map-marker-alt"></i> Location</h3>
+                        <div class="info-card-content">
+                            <p><strong>Address:</strong> 123 Art Street, Islamabad, Pakistan</p>
+                            <p><strong>Public Transport:</strong> Bus routes 15, 22, 37 stop directly outside</p>
+                            <p><strong>Parking:</strong> Underground parking available ($5 per hour, free for members)</p>
+                            <p><a href="#" style="color: #D2B48C;" data-bs-toggle="modal" data-bs-target="#mapModal">View Map & Directions</a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="info-card">
+                        <h3 class="info-card-title"><i class="fas fa-wheelchair"></i> Accessibility</h3>
+                        <div class="info-card-content">
+                            <p>The museum is fully accessible to visitors with disabilities.</p>
+                            <p>Wheelchair rentals are available free of charge.</p>
+                            <p>Audio guides and large-print materials available.</p>
+                            <p>Service animals are welcome.</p>
+                            <p><a href="#" style="color: #D2B48C;" data-bs-toggle="modal" data-bs-target="#accessibilityModal">Accessibility Services</a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="info-card">
+                        <h3 class="info-card-title"><i class="fas fa-utensils"></i> Amenities</h3>
+                        <div class="info-card-content">
+                            <p><strong>Café:</strong> Located on the ground floor, open during museum hours</p>
+                            <p><strong>Restaurant:</strong> Fine dining on the top floor with panoramic views</p>
+                            <p><strong>Gift Shop:</strong> Art books, prints, and unique souvenirs</p>
+                            <p><strong>Coat Check:</strong> Free service for all visitors</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="info-card">
+                        <h3 class="info-card-title"><i class="fas fa-info-circle"></i> Tours & Programs</h3>
+                        <div class="info-card-content">
+                            <p><strong>Guided Tours:</strong> Daily at 11:00 AM and 2:00 PM</p>
+                            <p><strong>Audio Guides:</strong> Available in 8 languages</p>
+                            <p><strong>Family Programs:</strong> Weekends, 10:00 AM - 12:00 PM</p>
+                            <p><strong>School Groups:</strong> By reservation only</p>
+                            <p><a href="#" style="color: #D2B48C;" data-bs-toggle="modal" data-bs-target="#programsModal">View All Programs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="testimonials-title">Visitor Experiences</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                        <p class="testimonial-text">The Renaissance Masterpieces exhibition was breathtaking. Seeing these works up close was a once-in-a-lifetime experience. The curation and presentation were impeccable.</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson" class="testimonial-author-image">
+                            <div class="testimonial-author-info">
+                                <span class="testimonial-author-name">Sarah Johnson</span>
+                                <span class="testimonial-author-title">Art Historian</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                        <p class="testimonial-text">I brought my children to the Dutch Golden Age exhibition, and they were captivated. The interactive elements made the art accessible and engaging for all ages.</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="testimonial-author-image">
+                            <div class="testimonial-author-info">
+                                <span class="testimonial-author-name">Michael Chen</span>
+                                <span class="testimonial-author-title">Parent & Museum Member</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                        <p class="testimonial-text">The Impressionist Revolution exhibition changed my perspective on art. The audio guide provided fascinating insights into the techniques and historical context.</p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Elena Rodriguez" class="testimonial-author-image">
+                            <div class="testimonial-author-info">
+                                <span class="testimonial-author-name">Elena Rodriguez</span>
+                                <span class="testimonial-author-title">First-time Visitor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="newsletter-title">Stay Updated</h2>
+            <p class="newsletter-subtitle">Subscribe to our newsletter to receive updates on upcoming exhibitions, events, and special offers.</p>
+            
+            <form class="newsletter-form" id="newsletterForm">
+                <div class="input-group">
+                    <input type="email" class="form-control newsletter-input" placeholder="Your email address" aria-label="Your email address" required>
+                    <button class="btn newsletter-btn" type="submit">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <!-- Social Media Links -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="footer-title">Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="artworks.html">Artworks</a></li>
+                        <li><a href="artists.html">Artists</a></li>
+                        <li><a href="exhibitions.html">Exhibitions</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="footer-title">Contact Us</h5>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Art Street, Islamabad, Pakistan</p>
+                        <p><i class="fas fa-phone"></i> +92 (123) 456-7890</p>
+                        <p><i class="fas fa-envelope"></i> info@artegallery.com</p>
+                    </div>
+                </div>
+                
+                <!-- Opening Hours -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title">Opening Hours</h5>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-clock"></i> Tuesday - Thursday: 10:00 AM - 6:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Friday: 10:00 AM - 9:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Saturday - Sunday: 9:00 AM - 7:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Monday: Closed</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ARTE Museum. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container">
+        <!-- Toasts will be dynamically added here -->
+    </div>
+
+    <!-- Book Tickets Modal -->
+    <div class="modal fade" id="bookTicketsModal" tabindex="-1" aria-labelledby="bookTicketsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookTicketsModalLabel">Book Tickets</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="/placeholder.svg" alt="Exhibition" class="exhibition-detail-image" id="modalExhibitionImage">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="exhibition-detail-info">
+                                <h3 class="exhibition-detail-title" id="modalExhibitionTitle"></h3>
+                                <div class="exhibition-detail">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span id="modalExhibitionDates"></span>
+                                </div>
+                            </div>
+                            
+                            <form id="ticketBookingForm">
+                                <div class="mb-3">
+                                    <label for="visitDate" class="form-label">Select Visit Date</label>
+                                    <input type="date" class="form-control" id="visitDate" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="visitTime" class="form-label">Select Time Slot</label>
+                                    <select class="form-select" id="visitTime" required>
+                                        <option value="">Choose a time slot</option>
+                                        <option value="10:00 AM">10:00 AM</option>
+                                        <option value="11:00 AM">11:00 AM</option>
+                                        <option value="12:00 PM">12:00 PM</option>
+                                        <option value="1:00 PM">1:00 PM</option>
+                                        <option value="2:00 PM">2:00 PM</option>
+                                        <option value="3:00 PM">3:00 PM</option>
+                                        <option value="4:00 PM">4:00 PM</option>
+                                        <option value="5:00 PM">5:00 PM</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="ticket-options">
+                                    <h5>Ticket Options</h5>
+                                    
+                                    <div class="ticket-option">
+                                        <span class="ticket-type">Adult</span>
+                                        <span class="ticket-price">$<span id="adultPrice"></span></span>
+                                        <input type="number" class="form-control ticket-quantity" id="adultQuantity" min="0" value="1">
+                                    </div>
+                                    
+                                    <div class="ticket-option">
+                                        <span class="ticket-type">Senior (65+)</span>
+                                        <span class="ticket-price">$<span id="seniorPrice"></span></span>
+                                        <input type="number" class="form-control ticket-quantity" id="seniorQuantity" min="0" value="0">
+                                    </div>
+                                    
+                                    <div class="ticket-option">
+                                        <span class="ticket-type">Student (with ID)</span>
+                                        <span class="ticket-price">$<span id="studentPrice"></span></span>
+                                        <input type="number" class="form-control ticket-quantity" id="studentQuantity" min="0" value="0">
+                                    </div>
+                                    
+                                    <div class="ticket-option">
+                                        <span class="ticket-type">Child (under 12)</span>
+                                        <span class="ticket-price">Free</span>
+                                        <input type="number" class="form-control ticket-quantity" id="childQuantity" min="0" value="0">
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h5>Total: $<span id="totalPrice">0</span></h5>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="completeBookingBtn">Complete Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pre-Book Modal -->
+    <div class="modal fade" id="preBookModal" tabindex="-1" aria-labelledby="preBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="preBookModalLabel">Pre-Book Tickets</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Be among the first to experience <span id="preBookExhibitionTitle"></span>!</p>
+                    <p>Exhibition dates: <span id="preBookExhibitionDates"></span></p>
+                    <p>Pre-booking allows you to secure your tickets before they're available to the general public.</p>
+                    
+                    <form id="preBookForm">
+                        <div class="mb-3">
+                            <label for="preBookName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="preBookName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="preBookEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="preBookEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="preBookPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="preBookPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="preBookTickets" class="form-label">Number of Tickets</label>
+                            <input type="number" class="form-control" id="preBookTickets" min="1" value="1" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitPreBookBtn">Submit Pre-Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Waitlist Modal -->
+    <div class="modal fade" id="waitlistModal" tabindex="-1" aria-labelledby="waitlistModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="waitlistModalLabel">Join Waitlist</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Join the waitlist for <span id="waitlistExhibitionTitle"></span>.</p>
+                    <p>Exhibition dates: <span id="waitlistExhibitionDates"></span></p>
+                    <p>We'll notify you as soon as tickets become available.</p>
+                    
+                    <form id="waitlistForm">
+                        <div class="mb-3">
+                            <label for="waitlistName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="waitlistName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="waitlistEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="waitlistEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="waitlistPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="waitlistPhone" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitWaitlistBtn">Join Waitlist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notify Modal -->
+    <div class="modal fade" id="notifyModal" tabindex="-1" aria-labelledby="notifyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notifyModalLabel">Get Notified</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Receive updates about <span id="notifyExhibitionTitle"></span>.</p>
+                    <p>Exhibition dates: <span id="notifyExhibitionDates"></span></p>
+                    <p>We'll send you information about this exhibition as it becomes available.</p>
+                    
+                    <form id="notifyForm">
+                        <div class="mb-3">
+                            <label for="notifyEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="notifyEmail" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="notifyPreferences">
+                            <label class="form-check-label" for="notifyPreferences">Also notify me about other exhibitions and events</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitNotifyBtn">Get Notified</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Archive Modal -->
+    <div class="modal fade" id="archiveModal" tabindex="-1" aria-labelledby="archiveModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="archiveModalLabel">Exhibition Archive</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3 id="archiveExhibitionTitle"></h3>
+                    <p><strong>Dates:</strong> <span id="archiveExhibitionDates"></span></p>
+                    
+                    <div class="exhibition-highlight-container">
+                        <h5 class="exhibition-highlight-title">Exhibition Highlights</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <img src="art.jpeg" alt="Exhibition Highlight" class="exhibition-highlight-image">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="ex8.jpg" alt="Exhibition Highlight" class="exhibition-highlight-image">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="archive.jpg" alt="Exhibition Highlight" class="exhibition-highlight-image">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>Exhibition Catalog</h5>
+                        <p>The exhibition catalog is available for purchase in our online shop.</p>
+                        <a href="#" class="btn btn-outline-light btn-sm">View Catalog</a>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>Press Coverage</h5>
+                        <ul>
+                            <li><a href="#" style="color: #D2B48C;">Art Daily: "A Stunning Display of Artistic Mastery"</a></li>
+                            <li><a href="#" style="color: #D2B48C;">The Art Review: "Must-See Exhibition of the Year"</a></li>
+                            <li><a href="#" style="color: #D2B48C;">Cultural Times: "Redefining How We Experience Art"</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Modal -->
+    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mapModalLabel">Location & Directions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="map">
+                        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212645.3407961695!2d72.94582674571657!3d33.61611318605312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfd07891722f%3A0x6059515c3bdb02b6!2sIslamabad%2C%20Islamabad%20Capital%20Territory%2C%20Pakistan!5e0!3m2!1sen!2sus!4v1683559103025!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    
+                    <div class="map-info-container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Address</h5>
+                                <p>123 Art Street<br>Islamabad, Pakistan</p>
+                                
+                                <h5 class="mt-3">Public Transportation</h5>
+                                <p><strong>Bus:</strong> Routes 15, 22, 37 stop directly outside</p>
+                                <p><strong>Metro:</strong> Blue Line to Art District Station (10 min walk)</p>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5>Parking</h5>
+                                <p>Underground parking available ($5 per hour, free for members)</p>
+                                <p>Additional public parking available at Art District Garage (2 blocks away)</p>
+                                
+                                <h5 class="mt-3">From the Airport</h5>
+                                <p>30 minutes by taxi or ride-share</p>
+                                <p>Airport shuttle available (reservation required)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="https://maps.google.com/?q=Islamabad,Pakistan" target="_blank" class="btn map-directions-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Modal -->
+    <div class="modal fade" id="accessibilityModal" tabindex="-1" aria-labelledby="accessibilityModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="accessibilityModalLabel">Accessibility Services</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>Physical Accessibility</h5>
+                    <ul>
+                        <li>Wheelchair accessible entrances and elevators</li>
+                        <li>Accessible restrooms on all floors</li>
+                        <li>Wheelchair rentals available free of charge</li>
+                        <li>Designated accessible parking spaces</li>
+                    </ul>
+                    
+                    <h5 class="mt-4">Visual Accessibility</h5>
+                    <ul>
+                        <li>Large-print exhibition guides</li>
+                        <li>Braille exhibition labels and maps</li>
+                        <li>Descriptive audio tours</li>
+                        <li>Tactile tours available by appointment</li>
+                    </ul>
+                    
+                    <h5 class="mt-4">Hearing Accessibility</h5>
+                    <ul>
+                        <li>Assistive listening devices for guided tours</li>
+                        <li>Sign language interpretation (with 48-hour notice)</li>
+                        <li>Captioned video content</li>
+                    </ul>
+                    
+                    <h5 class="mt-4">Sensory Accessibility</h5>
+                    <ul>
+                        <li>Sensory-friendly hours: First Tuesday of each month, 9:00 AM - 11:00 AM</li>
+                        <li>Quiet rooms available</li>
+                        <li>Sensory maps indicating sound and light levels</li>
+                    </ul>
+                    
+                    <p class="mt-4">For specific accessibility requests or to arrange accommodations, please contact our Visitor Services team at <a href="mailto:access@artegallery.com" style="color: #D2B48C;">access@artegallery.com</a> or call +92 (123) 456-7890 at least 48 hours in advance of your visit.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary" id="requestAccessibilityBtn">Request Accommodation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programs Modal -->
+    <div class="modal fade" id="programsModal" tabindex="-1" aria-labelledby="programsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="programsModalLabel">Tours & Programs</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Guided Tours</h5>
+                            <p><strong>Daily Highlights Tour</strong><br>11:00 AM and 2:00 PM<br>Free with admission</p>
+                            <p><strong>Exhibition-Specific Tours</strong><br>Thursdays and Saturdays at 1:00 PM<br>Free with exhibition ticket</p>
+                            <p><strong>Architecture Tour</strong><br>Sundays at 3:00 PM<br>$5 additional fee</p>
+                            
+                            <h5 class="mt-4">Family Programs</h5>
+                            <p><strong>Family Art Workshop</strong><br>Saturdays, 10:00 AM - 12:00 PM<br>$10 per family</p>
+                            <p><strong>Kids' Gallery Adventure</strong><br>Sundays, 10:00 AM - 11:30 AM<br>Free with admission</p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5>Adult Programs</h5>
+                            <p><strong>Art History Lectures</strong><br>First Wednesday of each month, 6:00 PM<br>$15 ($10 for members)</p>
+                            <p><strong>Artist Talks</strong><br>Varies by exhibition<br>$20 ($15 for members)</p>
+                            <p><strong>Drawing in the Galleries</strong><br>Thursdays, 5:00 PM - 7:00 PM<br>$25 includes materials</p>
+                            
+                            <h5 class="mt-4">School & Group Visits</h5>
+                            <p><strong>School Tours</strong><br>Tuesday-Friday, 10:00 AM - 2:00 PM<br>By reservation only</p>
+                            <p><strong>Group Tours (10+ people)</strong><br>Available daily<br>Reservation required 2 weeks in advance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>Upcoming Special Programs</h5>
+                        <table class="table table-dark table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Program</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>June 15, 2025</td>
+                                    <td>Renaissance Art Symposium</td>
+                                    <td>Full-day event with international scholars</td>
+                                </tr>
+                                <tr>
+                                    <td>July 8, 2025</td>
+                                    <td>Evening with the Curator</td>
+                                    <td>Behind-the-scenes look at Dutch Golden Age</td>
+                                </tr>
+                                <tr>
+                                    <td>August 20, 2025</td>
+                                    <td>Impressionist Painting Workshop</td>
+                                    <td>Hands-on workshop inspired by the exhibition</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary" id="bookProgramBtn">Book a Program</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Calendar row click handler
+            const calendarRows = document.querySelectorAll('.calendar-row');
+            calendarRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    const exhibition = this.getAttribute('data-exhibition');
+                    const dates = this.getAttribute('data-dates');
+                    const price = this.getAttribute('data-price');
+                    const image = this.getAttribute('data-image');
+                    
+                    // Open booking modal with exhibition details
+                    const bookingModal = new bootstrap.Modal(document.getElementById('bookTicketsModal'));
+                    document.getElementById('modalExhibitionTitle').textContent = exhibition;
+                    document.getElementById('modalExhibitionDates').textContent = dates;
+                    document.getElementById('modalExhibitionImage').src = image;
+                    document.getElementById('adultPrice').textContent = price;
+                    document.getElementById('seniorPrice').textContent = Math.round(price * 0.8);
+                    document.getElementById('studentPrice').textContent = Math.round(price * 0.6);
+                    
+                    bookingModal.show();
+                });
+                
+                // Make the row look clickable
+                row.style.cursor = 'pointer';
+            });
+
+            // Book Tickets Modal
+            const bookTicketsButtons = document.querySelectorAll('.btn-book-tickets[data-bs-toggle="modal"][data-bs-target="#bookTicketsModal"]');
+            bookTicketsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const exhibition = this.getAttribute('data-exhibition');
+                    const dates = this.getAttribute('data-dates');
+                    const price = this.getAttribute('data-price');
+                    const image = this.getAttribute('data-image');
+                    
+                    document.getElementById('modalExhibitionTitle').textContent = exhibition;
+                    document.getElementById('modalExhibitionDates').textContent = dates;
+                    document.getElementById('modalExhibitionImage').src = image;
+                    document.getElementById('adultPrice').textContent = price;
+                    document.getElementById('seniorPrice').textContent = Math.round(price * 0.8);
+                    document.getElementById('studentPrice').textContent = Math.round(price * 0.6);
+                    
+                    // Set minimum date to today
+                    const today = new Date();
+                    const yyyy = today.getFullYear();
+                    const mm = String(today.getMonth() + 1).padStart(2, '0');
+                    const dd = String(today.getDate()).padStart(2, '0');
+                    const formattedDate = `${yyyy}-${mm}-${dd}`;
+                    document.getElementById('visitDate').min = formattedDate;
+                    
+                    // Calculate initial total
+                    calculateTotal();
+                });
+            });
+
+            // Calculate total price
+            function calculateTotal() {
+                const adultPrice = parseFloat(document.getElementById('adultPrice').textContent);
+                const seniorPrice = parseFloat(document.getElementById('seniorPrice').textContent);
+                const studentPrice = parseFloat(document.getElementById('studentPrice').textContent);
+                
+                const adultQuantity = parseInt(document.getElementById('adultQuantity').value) || 0;
+                const seniorQuantity = parseInt(document.getElementById('seniorQuantity').value) || 0;
+                const studentQuantity = parseInt(document.getElementById('studentQuantity').value) || 0;
+                
+                const total = (adultPrice * adultQuantity) + (seniorPrice * seniorQuantity) + (studentPrice * studentQuantity);
+                document.getElementById('totalPrice').textContent = total.toFixed(2);
+            }
+            
+            // Add event listeners to quantity inputs
+            document.getElementById('adultQuantity').addEventListener('change', calculateTotal);
+            document.getElementById('seniorQuantity').addEventListener('change', calculateTotal);
+            document.getElementById('studentQuantity').addEventListener('change', calculateTotal);
+            document.getElementById('childQuantity').addEventListener('change', calculateTotal);
+            
+            // Complete Booking Button
+            document.getElementById('completeBookingBtn').addEventListener('click', function() {
+                const form = document.getElementById('ticketBookingForm');
+                const visitDate = document.getElementById('visitDate').value;
+                const visitTime = document.getElementById('visitTime').value;
+                
+                // Validate form
+                if (!visitDate || !visitTime) {
+                    showToast('Please select a date and time for your visit.', 'warning');
+                    return;
+                }
+                
+                const adultQuantity = parseInt(document.getElementById('adultQuantity').value) || 0;
+                const seniorQuantity = parseInt(document.getElementById('seniorQuantity').value) || 0;
+                const studentQuantity = parseInt(document.getElementById('studentQuantity').value) || 0;
+                const childQuantity = parseInt(document.getElementById('childQuantity').value) || 0;
+                
+                const totalTickets = adultQuantity + seniorQuantity + studentQuantity + childQuantity;
+                if (totalTickets === 0) {
+                    showToast('Please select at least one ticket.', 'warning');
+                    return;
+                }
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('bookTicketsModal'));
+                modal.hide();
+                
+                // Show success message
+                const exhibition = document.getElementById('modalExhibitionTitle').textContent;
+                showToast(`Your tickets for ${exhibition} have been booked successfully!`, 'success');
+            });
+            
+            // Pre-Book Modal
+            const preBookButtons = document.querySelectorAll('.btn-book-tickets[data-bs-toggle="modal"][data-bs-target="#preBookModal"]');
+            preBookButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const exhibition = this.getAttribute('data-exhibition');
+                    const dates = this.getAttribute('data-dates');
+                    
+                    document.getElementById('preBookExhibitionTitle').textContent = exhibition;
+                    document.getElementById('preBookExhibitionDates').textContent = dates;
+                });
+            });
+            
+            // Submit Pre-Book Button
+            document.getElementById('submitPreBookBtn').addEventListener('click', function() {
+                const name = document.getElementById('preBookName').value;
+                const email = document.getElementById('preBookEmail').value;
+                const phone = document.getElementById('preBookPhone').value;
+                const tickets = document.getElementById('preBookTickets').value;
+                
+                // Validate form
+                if (!name || !email || !phone || !tickets) {
+                    showToast('Please fill in all required fields.', 'warning');
+                    return;
+                }
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('preBookModal'));
+                modal.hide();
+                
+                // Show success message
+                const exhibition = document.getElementById('preBookExhibitionTitle').textContent;
+                showToast(`Your pre-booking for ${exhibition} has been submitted successfully!`, 'success');
+            });
+            
+            // Waitlist Modal
+            const waitlistButtons = document.querySelectorAll('.btn-book-tickets[data-bs-toggle="modal"][data-bs-target="#waitlistModal"]');
+            waitlistButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const exhibition = this.getAttribute('data-exhibition');
+                    const dates = this.getAttribute('data-dates');
+                    
+                    document.getElementById('waitlistExhibitionTitle').textContent = exhibition;
+                    document.getElementById('waitlistExhibitionDates').textContent = dates;
+                });
+            });
+            
+            // Submit Waitlist Button
+            document.getElementById('submitWaitlistBtn').addEventListener('click', function() {
+                const name = document.getElementById('waitlistName').value;
+                const email = document.getElementById('waitlistEmail').value;
+                const phone = document.getElementById('waitlistPhone').value;
+                
+                // Validate form
+                if (!name || !email || !phone) {
+                    showToast('Please fill in all required fields.', 'warning');
+                    return;
+                }
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('waitlistModal'));
+                modal.hide();
+                
+                // Show success message
+                const exhibition = document.getElementById('waitlistExhibitionTitle').textContent;
+                showToast(`You've been added to the waitlist for ${exhibition}!`, 'success');
+            });
+            
+            // Notify Modal
+            const notifyButtons = document.querySelectorAll('.btn-book-tickets[data-bs-toggle="modal"][data-bs-target="#notifyModal"]');
+            notifyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const exhibition = this.getAttribute('data-exhibition');
+                    const dates = this.getAttribute('data-dates');
+                    
+                    document.getElementById('notifyExhibitionTitle').textContent = exhibition;
+                    document.getElementById('notifyExhibitionDates').textContent = dates;
+                });
+            });
+            
+            // Submit Notify Button
+            document.getElementById('submitNotifyBtn').addEventListener('click', function() {
+                const email = document.getElementById('notifyEmail').value;
+                
+                // Validate form
+                if (!email) {
+                    showToast('Please enter your email address.', 'warning');
+                    return;
+                }
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('notifyModal'));
+                modal.hide();
+                
+                // Show success message
+                const exhibition = document.getElementById('notifyExhibitionTitle').textContent;
+                showToast(`You'll be notified about ${exhibition} updates!`, 'success');
+            });
+            
+            // Archive Modal
+            const archiveButtons = document.querySelectorAll('.btn-book-tickets[data-bs-toggle="modal"][data-bs-target="#archiveModal"]');
+            archiveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const exhibition = this.getAttribute('data-exhibition');
+                    const dates = this.getAttribute('data-dates');
+                    
+                    document.getElementById('archiveExhibitionTitle').textContent = exhibition;
+                    document.getElementById('archiveExhibitionDates').textContent = dates;
+                });
+            });
+            
+            // Request Accessibility Button
+            document.getElementById('requestAccessibilityBtn').addEventListener('click', function() {
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('accessibilityModal'));
+                modal.hide();
+                
+                // Show success message
+                showToast('Your accessibility request has been submitted. Our team will contact you shortly.', 'success');
+            });
+            
+            // Book Program Button
+            document.getElementById('bookProgramBtn').addEventListener('click', function() {
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('programsModal'));
+                modal.hide();
+                
+                // Show success message
+                showToast('Thank you for your interest! Please check your email for program booking details.', 'success');
+            });
+            
+            // Newsletter Form Submission
+            document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                
+                if (email) {
+                    // Clear the form
+                    emailInput.value = '';
+                    
+                    // Show success message
+                    showToast('Thank you for subscribing to our newsletter!', 'success');
+                }
+            });
+            
+            // Toast notification function
+            function showToast(message, type = 'info') {
+                const toastContainer = document.querySelector('.toast-container');
+                
+                // Create toast element
+                const toastEl = document.createElement('div');
+                toastEl.className = 'toast';
+                toastEl.setAttribute('role', 'alert');
+                toastEl.setAttribute('aria-live', 'assertive');
+                toastEl.setAttribute('aria-atomic', 'true');
+                
+                // Set toast content
+                let iconClass = 'fas fa-info-circle';
+                let bgColor = '#1a1a1a';
+                
+                if (type === 'success') {
+                    iconClass = 'fas fa-check-circle';
+                    bgColor = '#1a3a1a';
+                } else if (type === 'warning') {
+                    iconClass = 'fas fa-exclamation-triangle';
+                    bgColor = '#3a2a1a';
+                } else if (type === 'error') {
+                    iconClass = 'fas fa-times-circle';
+                    bgColor = '#3a1a1a';
+                }
+                
+                toastEl.style.backgroundColor = bgColor;
+                
+                toastEl.innerHTML = `
+                    <div class="toast-header">
+                        <i class="${iconClass}" style="color: #D2B48C; margin-right: 8px;"></i>
+                        <strong class="me-auto">ARTE Gallery</strong>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                `;
+                
+                // Add toast to container
+                toastContainer.appendChild(toastEl);
+                
+                // Initialize and show toast
+                const toast = new bootstrap.Toast(toastEl, {
+                    autohide: true,
+                    delay: 5000
+                });
+                toast.show();
+                
+                // Remove toast after it's hidden
+                toastEl.addEventListener('hidden.bs.toast', function() {
+                    toastEl.remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
