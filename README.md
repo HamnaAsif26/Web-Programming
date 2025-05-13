@@ -67,36 +67,6 @@ arte-gallery/
 └── server.js
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB
-- Cloudinary account
-
-### Installation
-
-1. Clone the repository and install dependencies:
-```bash
-git clone <repository-url>
-cd arte-gallery
-npm install
-```
-
-2. Create `.env` file:
-```env
-MONGODB_URI=mongodb://localhost:27017/arte_gallery
-PORT=3000
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
-
-3. Start the server:
-```bash
-npm run dev
-```
-
 ## 🔑 Current API Endpoints
 
 ### Artworks
